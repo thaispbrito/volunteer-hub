@@ -9,17 +9,27 @@
 
 <body>
     <p><a href="/vip-lounge">Get into the VIP Users Only lounge!</a></p>
+
     <% if (user) { %>
-    <h1>Welcome to the app, <%= user.username %>!</h1>
-    <p>
-        <!-- new sign out link -->
-        <a href="/auth/sign-out">Sign out</a>
-    </p>
+        <h1>Welcome to the app, <%= user.username %>!</h1>
+
+        <!-- If a volunteer profile exists, redirect to the profile -->
+         <% if (volunteer) { %>
+            <a href="/volunteer/profile">My Profile</a>
+        <!-- Otherwise, create a new one -->
+        <% } else {  %>
+            <a href="/volunteer/new">Add a Profile</a>
+        <% } %> 
+
+        <p>
+            <!-- new sign out link -->
+            <a href="/auth/sign-out">Sign out</a>
+        </p>
     <% } else { %>
-    <h1>Welcome to the app, guest.</h1>
-    <p>
-        <a href="/auth/sign-up">Sign up</a> or <a href="/auth/sign-in">Sign in</a>.
-    </p>
+        <h1>Welcome to the app, guest.</h1>
+        <p>
+            <a href="/auth/sign-up">Sign up</a> or <a href="/auth/sign-in">Sign in</a>.
+        </p>
     <% } %>
 </body>
 
