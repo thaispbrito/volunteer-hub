@@ -60,9 +60,9 @@ app.use(passUserToView);
 //     res.render("index.ejs");
 // });
 
-app.get("/vip-lounge", isSignedIn, (req, res) => {
-    res.send(`Welcome to the party ${req.session.user.username}.`);
-});
+// app.get("/vip-lounge", isSignedIn, (req, res) => {
+//     res.send(`Welcome to the party ${req.session.user.username}.`);
+// });
 
 app.use("/auth", authController);
 app.use("/", usersController);  // for handling homepage

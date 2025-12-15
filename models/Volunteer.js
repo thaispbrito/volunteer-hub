@@ -28,7 +28,7 @@ const volunteerSchema = new mongoose.Schema({
     },
     model: {
         type: String,
-        enum: ["In-Person", "Remote"],
+        enum: ["inPerson", "remote"],
         required: true,
     },
     availability: {

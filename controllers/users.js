@@ -3,6 +3,8 @@ const router = express.Router();
 
 const Volunteer = require("../models/Volunteer");
 
+// GET /
+// It handles the homepage 
 router.get("/", async (req, res, next) => {
   try {
     let volunteer = null;
