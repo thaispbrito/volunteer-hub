@@ -19,6 +19,7 @@ const passUserToView = require("./middleware/pass-user-to-view.js");
 const port = process.env.PORT ? process.env.PORT : "3000";
 
 const authController = require("./controllers/auth.js");
+const volunteersController = require("./controllers/volunteers.js");
 
 mongoose.connect(process.env.MONGODB_URI);
 
@@ -63,6 +64,7 @@ app.get("/vip-lounge", isSignedIn, (req, res) => {
 });
 
 app.use("/auth", authController);
+app.use("/volunteers", volunteersController);
 
 
 app.listen(port, () => {
