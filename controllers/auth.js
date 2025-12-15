@@ -1,19 +1,15 @@
 const express = require("express");
 const router = express.Router();
+const bcrypt = require("bcrypt");
 
 const User = require("../models/User.js");
 
-const bcrypt = require("bcrypt");
-
-
 // GET SIGN UP TEMPLATE
-// GET: /auth/sign-up
 router.get("/sign-up", (req, res) => {
     res.render("auth/sign-up.ejs");
 });
 
 // CREATE A USER
-// POST: /auth/sign-up
 router.post("/sign-up", async (req, res) => {
     // Will check to see if username exists
     const userInDatabase = await User.findOne({ username: req.body.username });
@@ -21,20 +17,22 @@ router.post("/sign-up", async (req, res) => {
         return res.send("Username already taken.");
     }
 
+    // If username is not taken, check if the password and confirm password match
     if (req.body.password !== req.body.confirmPassword) {
         return res.send("Password and Confirm Password must match");
     }
 
+    // Must hash the password before sending to the database
     const hashedPassword = bcrypt.hashSync(req.body.password, 10);
     req.body.password = hashedPassword;
 
     // Creating a new user
     const user = await User.create(req.body);
-    // res.send(`Thanks for signing up, ${user.username}!`);
 
     // Sign 'em up, sign 'em in!
     req.session.user = {
         username: user.username,
+        _id: user._id,
     };
 
     req.session.save(() => {
@@ -53,7 +51,7 @@ router.post("/sign-in", async (req, res) => {
     // Finding user
     const userInDatabase = await User.findOne({ username: req.body.username });
 
-    // User does not exist in db...
+    // User does not exist in db
     if (!userInDatabase) {
         return res.send("Login failed. User not found.");
     }
@@ -68,19 +66,16 @@ router.post("/sign-in", async (req, res) => {
 
     req.session.user = {
         username: userInDatabase.username,
-        // _id: userInDatabase._id
+        _id: userInDatabase._id
     };
 
     req.session.save(() => {
         res.redirect("/");
     });
 
-    // res.redirect("/");
-    // res.send("Request to sign in received!");
 });
 
 // SIGN USER OUT!
-// GET /auth/sign-out
 router.get("/sign-out", (req, res) => {
 
     req.session.destroy(() => {
