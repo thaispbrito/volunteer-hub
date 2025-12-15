@@ -19,6 +19,7 @@ const passUserToView = require("./middleware/pass-user-to-view.js");
 const port = process.env.PORT ? process.env.PORT : "3000";
 
 const authController = require("./controllers/auth.js");
+const usersController = require("./controllers/users.js");
 const volunteersController = require("./controllers/volunteers.js");
 
 mongoose.connect(process.env.MONGODB_URI);
@@ -55,16 +56,17 @@ app.use(passUserToView);
 
 // ROUTES
 
-app.get("/", (req, res) => {
-    res.render("index.ejs");
-});
+// app.get("/", (req, res) => {
+//     res.render("index.ejs");
+// });
 
 app.get("/vip-lounge", isSignedIn, (req, res) => {
     res.send(`Welcome to the party ${req.session.user.username}.`);
 });
 
 app.use("/auth", authController);
-app.use("/volunteers", volunteersController);
+app.use("/", usersController);  // for handling homepage
+app.use("/volunteer", volunteersController);  // singular URL for 1:1 
 
 
 app.listen(port, () => {
