@@ -15,6 +15,17 @@ router.get('/', async (req, res) => {
     }
 })
 
+// GET /organizations/new
+// Display a form to create new organization 
+router.get('/new', (req, res) => {
+    try {
+        res.render('organizations/new.ejs')
+    } catch (err) {
+        console.log(err)
+        res.redirect('/')
+    }
+})
+
 module.exports = router;
 
 

@@ -15,7 +15,7 @@ router.get("/", async (req, res, next) => {
 		volunteer = await Volunteer.findOne({ userId: user._id });
 		organizations = await Organization.find({ owner: user._id });  
     }
-    res.render('index.ejs', { user, volunteer, organizations });  // Make variables called user, volunteer, and organization available to the view
+    res.render('index.ejs', { user, volunteer, organizations });  // Make variables called user, volunteer, and organizations available to the view
 
   } catch (err) {
 	console.log(err);

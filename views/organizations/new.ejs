@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Add New Organization</title>
+    </head>
+    <body>
+        <%- include('../partials/_navbar.ejs') %>
+        <h1>Create New Organization Profile</h1>
+        <form action="/organizations" method="POST">
+            <label for="slogan">Slogan:</label>
+            <input
+                type="text"
+                name="slogan"
+                id="slogan"
+                required
+            />
+
+            <label for="organization">Organization Name:</label>
+            <input type="text" name="organization" id="organization" required />
+
+            <label for="cause">Cause:</label>
+            <select name="cause" id="cause" required>
+                <option value="A">A</option>
+                <option value="B">B</option>
+                <option value="C">C</option>
+                <option value="D">D</option>
+            </select>    
+
+            <label for="story">Our Story:</label>
+            <textarea name="story" id="story"></textarea>
+
+            <label for="headquarters"> Headquarters:</label>
+            <input type="headquarters" name="headquarters" id="headquarters" required />
+
+            <label for="contactInfo">Contact Information:</label>
+            <input type="contactInfo" name="contactInfo" id="contactInfo" required />
+
+            <button type="submit">Create Profile</button>
+        </form>
+    </body>
+</html>
