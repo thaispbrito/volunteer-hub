@@ -26,6 +26,37 @@ router.get('/new', (req, res) => {
     }
 })
 
+// POST /organizations
+// Create new organization
+router.post('/', async (req, res) => {
+    try {
+        req.body.owner = req.session.user._id
+        await Organization.create(req.body)
+        res.redirect('/organizations')
+    } catch (err) {
+        console.log(err)
+        res.redirect('/')
+    }
+})
+
+// GET /organizations/:organizationId
+// Display one organization
+router.get('/:organizationId', async (req, res) => {
+    try {
+        const organization = await Organization.findById(req.params.organizationId).populate(
+            'owner'
+        )
+        res.render('organizations/show.ejs', {
+            organization,
+        })
+    } catch (err) {
+        console.log(err)
+        res.redirect('/')
+    }
+})
+
+
+
 module.exports = router;
 
 
