@@ -13,7 +13,7 @@ router.get("/", async (req, res, next) => {
 	const user = req.session.user;
 	if (user) {
 		volunteer = await Volunteer.findOne({ userId: user._id });
-		organizations = await Organization.find({owner: user._id});  
+		organizations = await Organization.find({ owner: user._id });  
     }
     res.render('index.ejs', { user, volunteer, organizations });  // Make variables called user, volunteer, and organization available to the view
 
