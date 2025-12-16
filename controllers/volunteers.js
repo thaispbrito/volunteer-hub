@@ -47,6 +47,63 @@ router.post('/', async (req, res) => {
     }
 })
 
+// GET /volunteer/edit
+// Show form to edit a volunteer profile
+router.get('/edit', async (req, res) => {
+    try {
+        const user = req.session.user;
+        if (!user) return res.redirect("/auth/sign-in")
 
+        const volunteer = await Volunteer.findOne({userId: user._id});
+        res.render('volunteers/edit.ejs', {
+            volunteer: volunteer,
+        });
+    } catch (err) {
+        console.log(err);
+        res.redirect('/')
+    }  
+});
+
+// PUT /volunteer/
+// Update volunteer profile
+router.put('/', async (req, res) => {
+    try {
+        const user = req.session.user;
+        if (!user) return res.redirect("/auth/sign-in")
+
+        const volunteer = await Volunteer.findOne({userId: user._id});
+        if (!volunteer) {
+            return res.redirect('/');
+        }
+
+        await volunteer.updateOne(req.body);
+        res.redirect('/volunteer/profile');
+
+    } catch (error) {
+        console.log(error);
+        res.redirect('/');
+    }
+});
+
+// DELETE /volunteer/
+// Delete volunteer profile
+router.delete('/', async (req, res) => {
+    try {
+        const user = req.session.user;
+        if (!user) return res.redirect("/auth/sign-in");
+
+        const volunteer = await Volunteer.findOne({userId: user._id});
+        if (!volunteer) {
+            return res.redirect('/');
+        }
+             
+        await volunteer.deleteOne();
+        res.redirect('/');
+
+    } catch (error) {
+        console.error(error)
+        res.redirect('/')
+    }
+})
 
 module.exports = router;
