@@ -79,8 +79,8 @@ router.put('/', async (req, res) => {
         await volunteer.updateOne(req.body);
         res.redirect('/volunteer/profile');
 
-    } catch (error) {
-        console.log(error);
+    } catch (err) {
+        console.log(err);
         res.redirect('/');
     }
 });
@@ -100,8 +100,8 @@ router.delete('/', async (req, res) => {
         await volunteer.deleteOne();
         res.redirect('/');
 
-    } catch (error) {
-        console.error(error)
+    } catch (err) {
+        console.error(err)
         res.redirect('/')
     }
 })
