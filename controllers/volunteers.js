@@ -15,7 +15,7 @@ router.get('/profile', async (req, res) => {
             return res.redirect('/volunteer/new');
         }
 
-        res.render('volunteers/show.ejs', { volunteer })
+        res.render('volunteers/show.ejs', { volunteer }); // Make a variable called volunteer available to the view
 
     } catch (err) {
         console.log(err)

@@ -9,7 +9,19 @@
 
     <body>
         <%- include('../partials/_navbar.ejs') %>
-        <h1>Here's my profile info!</h1>
+        <h1>My Volunteer Profile</h1>
+        <h3><%= volunteer.title %></h3>
+        <p>Name: <%= volunteer.firstName %> <%= volunteer.lastName %></p>
+        <p>Cause: <%= volunteer.cause %></p>
+        <p>Skills: <%= volunteer.skills %></p>
+        <p>Volunteering Model: <%= volunteer.model %></p>
+        <p>Cause: <%= volunteer.cause %></p>
+        <p>Availability: <%= volunteer.availability %></p>
+        <p>Location: <%= volunteer.location %></p>
+        <p>Contact Information: <%= volunteer.contactInfo %></p>
+        <p>Bio: <%= volunteer.bio %></p>
+        <p>Additional Comments: <%= volunteer.cause %></p>
+
     </body>
 
 </html>
