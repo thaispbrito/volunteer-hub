@@ -21,6 +21,7 @@ const port = process.env.PORT ? process.env.PORT : "3000";
 const authController = require("./controllers/auth.js");
 const usersController = require("./controllers/users.js");
 const volunteersController = require("./controllers/volunteers.js");
+const organizationsController = require("./controllers/organizations.js");
 
 mongoose.connect(process.env.MONGODB_URI);
 
@@ -66,8 +67,8 @@ app.use(passUserToView);
 
 app.use("/auth", authController);
 app.use("/", usersController);  // for handling homepage
-app.use("/volunteer", volunteersController);  // singular URL for 1:1 
-
+app.use("/volunteer", volunteersController);  // singular URL for one-to-one relationship
+app.use("/organizations", isSignedIn, organizationsController);  // One-to-many relationship
 
 app.listen(port, () => {
     console.log(`The express app is ready on port ${port}!`);

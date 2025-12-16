@@ -15,10 +15,18 @@
 
             <!-- If a volunteer profile exists, redirect to the profile -->
             <% if (volunteer) { %>
-                <a href="/volunteer/profile">My Profile</a>
+                <a href="/volunteer/profile">My Volunteer Profile</a>
             <!-- Otherwise, create a new one -->
             <% } else {  %>
-                <a href="/volunteer/new">Add a Profile</a>
+                <a href="/volunteer/new">Add Volunteer Profile</a>
+            <% } %> 
+
+            <!-- If organization profiles exist, list all of them-->
+            <% if (organizations.legnth > 0) { %>
+                <a href="/organizations">My Organization Profiles</a>
+            <!-- If there is no organization profile, create a new one -->
+            <% } else {  %>
+                <a href="/organizations/new">Add Organization Profile</a>
             <% } %> 
 
         <% } else { %>
