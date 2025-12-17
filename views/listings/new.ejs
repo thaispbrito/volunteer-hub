@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>All Listings</title>
+    </head>
+    <body>
+        <%- include('../partials/_navbar.ejs') %>
+        <h1>Add a New Listing!</h1>
+        <form action="/listings" method="POST">
+            
+            <label for="event">Event:</label>
+            <input type="text" name="event" id="event" required/>
+
+            <label for="description">Description:</label>
+            <textarea name="description" id="description" required></textarea>
+
+            <label for="cause">Cause:</label>
+            <select name="cause" id="cause" required>
+                <option value="A">A</option>
+                <option value="B">B</option>
+                <option value="C">C</option>
+                <option value="D">D</option>
+            </select>   
+
+            <label for="skills">Required Skills:</label>
+            <textarea name="skills" id="skills" required></textarea>
+            
+            <label for="streetAddress">Street address:</label>
+            <input type="text" name="streetAddress" id="street" required/>
+
+            <label for="city">City:</label>
+            <input type="text" name="city" id="city" required/>
+            
+            <label for="schedule">Event Schedule:</label>
+            <input type="schedule" name="schedule" id="schedule"/>
+
+            <button type="submit">Add Listing</button>
+            
+        </form>
+    </body>
+</html>

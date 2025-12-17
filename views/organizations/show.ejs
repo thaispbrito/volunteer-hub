@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title><%= organization.organization %>'s profile</title>
+        <title><%= organization.orgName %>'s profile</title>
     </head>
     <body>
         <%- include('../partials/_navbar.ejs') %>
@@ -24,6 +24,21 @@
         >
             <button type="submit">Delete Profile</button>
         </form>
+
+
+        <h2>Listings</h2>
+        <p>
+            You own <%= myListings.length %> <%= myListings.length === 1 ?
+            'listing.' : 'listings.' %>
+        </p>
+        <ul>
+            <% myListings.forEach((listing) => { %>
+            <li>
+                A listing for the <%= listing.event %> event
+                <a href="/listings/<%= listing._id %>">View more details.</a>
+            </li>
+            <% }) %>
+        </ul>
 
     </body>
 </html>

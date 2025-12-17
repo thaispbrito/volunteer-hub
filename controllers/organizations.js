@@ -1,7 +1,8 @@
 const express = require('express')
 const router = express.Router()
 
-const Organization = require('../models/Organization')
+const Organization = require('../models/Organization');
+const Listing = require('../models/Listing.js')
 
 // GET /organizations
 // Index - List all organizations for logged-in user
@@ -40,14 +41,25 @@ router.post('/', async (req, res) => {
 })
 
 // GET /organizations/:organizationId
-// Display one organization
+// Display one organization with its listings and favorites
 router.get('/:organizationId', async (req, res) => {
     try {
-        const organization = await Organization.findById(req.params.organizationId).populate(
-            'owner'
-        )
+        const organization = await Organization.findById(req.params.organizationId).populate('owner');
+
+        // Listings owned by this organization
+        const myListings = await Listing.find({
+            owner: organization._id,
+        }).populate('owner')
+
+        // // Listings favorited by this organization
+        // const myFavoriteListings = await Listing.find({
+        //     favoritedByUsers: req.session.user._id,
+        // }).populate('owner')
+
         res.render('organizations/show.ejs', {
             organization,
+            myListings,
+            // myFavoriteListings,
         })
     } catch (err) {
         console.log(err)
@@ -102,7 +114,6 @@ router.put('/:organizationId', async (req, res) => {
         res.redirect('/')
     }
 })
-
 
 module.exports = router;
 

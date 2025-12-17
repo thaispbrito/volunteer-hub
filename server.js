@@ -22,6 +22,7 @@ const authController = require("./controllers/auth.js");
 const usersController = require("./controllers/users.js");
 const volunteersController = require("./controllers/volunteers.js");
 const organizationsController = require("./controllers/organizations.js");
+const listingsController = require('./controllers/listings.js')
 
 mongoose.connect(process.env.MONGODB_URI);
 
@@ -69,6 +70,7 @@ app.use("/auth", authController);
 app.use("/", isSignedIn, usersController);  // for handling homepage
 app.use("/volunteer", isSignedIn, volunteersController);  // singular URL for one-to-one relationship
 app.use("/organizations", isSignedIn, organizationsController);  // One-to-many relationship
+app.use('/listings', isSignedIn, listingsController);  // One-to-many relationship
 
 app.listen(port, () => {
     console.log(`The express app is ready on port ${port}!`);

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title><%= listing.owner.orgName %>'s listing</title>
+    </head>
+    <body>
+        <%- include('../partials/_navbar.ejs') %>
+
+        <h1><%= listing.event %></h1>
+
+        <h2>Details</h2>
+        <p>Description: <%= listing.description %></p>
+        <p>Cause: <%= listing.cause %></p>
+        <p>Required Skills: $<%= listing.skills %></p>
+        <p>Street address: <%= listing.streetAddress %></p>  
+        <p>City: <%= listing.city %></p>
+        <p>Event Schedule: <%= listing.schedule %></p>
+        
+        <h2>Owner</h2>
+        <% if (listing.owner._id.equals(currentUserId)) { %>
+        <p>You own this!</p>
+        <a href="/listings/<%= listing._id %>/edit">Edit this listing</a>
+        <form
+            action="/listings/<%= listing._id %>?_method=DELETE"
+            method="POST"
+        >
+            <button type="submit">Delete this listing</button>
+        </form>
+        <% } else { %>
+        <p>You don't own this, <%= listing.owner.orgName %> does!</p>
+        <% } %>
+
+        <h2>Favorites</h2>
+
+        <p>Favorited by <%= listing.favoritedByUsers.length %> people.</p>
+
+    </body>
+</html>
