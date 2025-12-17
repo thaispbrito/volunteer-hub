@@ -1,8 +1,9 @@
 const express = require('express')
 const router = express.Router()
 
-const Listing = require('../models/Listing')
-const Organization = require('../models/Organization')
+const Listing = require('../models/Listing');
+const Organization = require('../models/Organization');
+const Volunteer = require('../models/Volunteer');
 
 // GET /listings
 // Index - View all listings from an organization
@@ -94,11 +95,36 @@ router.delete('/:listingId', async (req, res) => {
 
 // POST /listings/:listingId/favorited-by/:userId
 // Mark a listing as favorited by a user
-router.post('/:listingId/favorited-by/:userId', async (req, res) => {
+// router.post('/:listingId/favorited-by/:userId', async (req, res) => {
+//     try {
+//         await Listing.findByIdAndUpdate(req.params.listingId, {
+//             $push: { favoritedByUsers: req.params.userId },
+//         })
+//         res.redirect(`/listings/${req.params.listingId}`)
+//     } catch (err) {
+//         console.log(err)
+//         res.redirect('/')
+//     }
+// })
+
+
+// POST /listings/:listingId/favorite
+router.post('/:listingId/favorite', async (req, res) => {
     try {
-        await Listing.findByIdAndUpdate(req.params.listingId, {
-            $push: { favoritedByUsers: req.params.userId },
+        // user is guaranteed by isSignedIn
+        const volunteer = await Volunteer.findOne({
+            userId: req.session.user._id,
         })
+
+        if (!volunteer) {
+            return res.send('You must have a volunteer profile to favorite listings.')
+            // or: res.redirect('/volunteer/new')
+        }
+
+        await Listing.findByIdAndUpdate(req.params.listingId, {
+            $addToSet: { favoritedByVolunteers: volunteer._id },
+        })
+
         res.redirect(`/listings/${req.params.listingId}`)
     } catch (err) {
         console.log(err)
@@ -106,13 +132,36 @@ router.post('/:listingId/favorited-by/:userId', async (req, res) => {
     }
 })
 
+
 // DELETE /listings/:listingId/favorited-by/:userId
 // Unfavorite a listing
-router.delete('/:listingId/favorited-by/:userId', async (req, res) => {
+// router.delete('/:listingId/favorited-by/:userId', async (req, res) => {
+//     try {
+//         await Listing.findByIdAndUpdate(req.params.listingId, {
+//             $pull: { favoritedByUsers: req.params.userId },
+//         })
+//         res.redirect(`/listings/${req.params.listingId}`)
+//     } catch (err) {
+//         console.log(err)
+//         res.redirect('/')
+//     }
+// })
+
+// DELETE /listings/:listingId/favorite
+router.delete('/:listingId/favorite', async (req, res) => {
     try {
-        await Listing.findByIdAndUpdate(req.params.listingId, {
-            $pull: { favoritedByUsers: req.params.userId },
+        const volunteer = await Volunteer.findOne({
+            userId: req.session.user._id,
         })
+
+        if (!volunteer) {
+            return res.redirect('/')
+        }
+
+        await Listing.findByIdAndUpdate(req.params.listingId, {
+            $pull: { favoritedByVolunteers: volunteer._id },
+        })
+
         res.redirect(`/listings/${req.params.listingId}`)
     } catch (err) {
         console.log(err)
@@ -122,19 +171,53 @@ router.delete('/:listingId/favorited-by/:userId', async (req, res) => {
 
 // GET /listings/:listingId
 // Display a single listing
+// router.get('/:listingId', async (req, res) => {
+//     try {
+//         const listing = await Listing.findById(req.params.listingId).populate(
+//             'owner'
+//         )
+
+//         const volunteerHasFavorited = listing.favoritedByUsers.some((user) =>
+//             user.equals(req.session.volunteer._id)
+//         )
+
+//         res.render('listings/show.ejs', {
+//             listing,
+//             volunteerHasFavorited,
+//             currentUserId: req.session.user._id,
+//         })
+//     } catch (err) {
+//         console.log(err)
+//         res.redirect('/')
+//     }
+// })
+
+// GET /listings/:listingId
+// Display a single listing
 router.get('/:listingId', async (req, res) => {
     try {
-        const listing = await Listing.findById(req.params.listingId).populate(
-            'owner'
-        )
+        const listing = await Listing.findById(req.params.listingId)
+            .populate('owner')
+            .populate('favoritedByVolunteers')
 
-        const userHasFavorited = listing.favoritedByUsers.some((user) =>
-            user.equals(req.session.user._id)
-        )
+        let volunteer = null
+        let volunteerHasFavorited = false
 
+        if (req.session.user) {
+            volunteer = await Volunteer.findOne({
+                userId: req.session.user._id,
+            })
+
+            if (volunteer) {
+                volunteerHasFavorited = listing.favoritedByVolunteers.some(v =>
+                    v._id.equals(volunteer._id)
+                )
+            }
+        }
         res.render('listings/show.ejs', {
             listing,
-            userHasFavorited,
+            volunteer,
+            volunteerHasFavorited,
             currentUserId: req.session.user._id,
         })
     } catch (err) {

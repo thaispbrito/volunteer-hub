@@ -22,6 +22,18 @@
         <p>Bio: <%= volunteer.bio %></p>
         <p>Additional Comments: <%= volunteer.comments %></p>
 
+        <h3>My Favorites</h2>
+        <p>You have favorited <%=myFavoriteListings.length%> listings</p>
+        <ul>
+            <% myFavoriteListings.forEach((listing) => { %>
+            <li>
+                A listing for the <%= listing.event %> owned by <%=
+                listing.owner.orgName %>.
+                <a href="/listings/<%= listing._id %>">View more details.</a>
+            </li>
+            <% }) %>
+        </ul>
+
         <a href="/volunteer/edit">Edit Profile</a>
         <form
             action="/volunteer/?_method=DELETE"

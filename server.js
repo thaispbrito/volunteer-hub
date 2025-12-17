@@ -67,7 +67,7 @@ app.use(passUserToView);
 // });
 
 app.use("/auth", authController);
-app.use("/", isSignedIn, usersController);  // for handling homepage
+app.use("/", usersController);  // for handling homepage
 app.use("/volunteer", isSignedIn, volunteersController);  // singular URL for one-to-one relationship
 app.use("/organizations", isSignedIn, organizationsController);  // One-to-many relationship
 app.use('/listings', isSignedIn, listingsController);  // One-to-many relationship

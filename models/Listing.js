@@ -34,10 +34,10 @@ const listingSchema = new mongoose.Schema(
             type: mongoose.Schema.Types.ObjectId,
             ref: "Organization",
         },
-        favoritedByUsers: [
+        favoritedByVolunteers: [
             {
                 type: mongoose.Schema.Types.ObjectId,
-                ref: "User",
+                ref: "Volunteer",
             },
         ],
     },

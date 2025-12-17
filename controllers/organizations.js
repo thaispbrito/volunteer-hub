@@ -41,7 +41,7 @@ router.post('/', async (req, res) => {
 })
 
 // GET /organizations/:organizationId
-// Display one organization with its listings and favorites
+// Display one organization with its listings
 router.get('/:organizationId', async (req, res) => {
     try {
         const organization = await Organization.findById(req.params.organizationId).populate('owner');

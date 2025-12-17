@@ -1,7 +1,8 @@
 const express = require('express')
 const router = express.Router()
 
-const Volunteer = require('../models/Volunteer')
+const Volunteer = require('../models/Volunteer');
+const Listing = require('../models/Listing');
 
 // GET /volunteer/profile
 // View the logged-in user's volunteer profile if any
@@ -15,7 +16,15 @@ router.get('/profile', async (req, res) => {
             return res.redirect('/volunteer/new');
         }
 
-        res.render('volunteers/show.ejs', { volunteer }); // Make a variable called volunteer available to the view
+        // Listings favorited by this volunteer
+        const myFavoriteListings = await Listing.find({
+            favoritedByVolunteers: volunteer._id,
+        }).populate('owner')
+
+        res.render('volunteers/show.ejs', { 
+            volunteer,
+            myFavoriteListings, 
+        }); 
 
     } catch (err) {
         console.log(err)

@@ -19,7 +19,7 @@
         <p>Event Schedule: <%= listing.schedule %></p>
         
         <h2>Owner</h2>
-        <% if (listing.owner._id.equals(currentUserId)) { %>
+        <% if (listing.owner.owner.equals(currentUserId)) { %>
         <p>You own this!</p>
         <a href="/listings/<%= listing._id %>/edit">Edit this listing</a>
         <form
@@ -34,7 +34,21 @@
 
         <h2>Favorites</h2>
 
-        <p>Favorited by <%= listing.favoritedByUsers.length %> people.</p>
+        <p>Favorited by <%= listing.favoritedByVolunteers.length %> volunteers.</p>
+
+        <% if (volunteer) { %>
+        <% if (volunteerHasFavorited) { %>
+            <form action="/listings/<%= listing._id %>/favorite?_method=DELETE" method="POST">
+            <button type="submit">Unfavorite</button>
+            </form>
+        <% } else { %>
+            <form action="/listings/<%= listing._id %>/favorite" method="POST">
+            <button type="submit">Favorite</button>
+            </form>
+        <% } %>
+        <% } else { %>
+        <p>You must have a volunteer profile to favorite listings.</p>
+        <% } %>
 
     </body>
 </html>
