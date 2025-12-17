@@ -4,7 +4,7 @@ const router = express.Router()
 const Organization = require('../models/Organization')
 
 // GET /organizations
-// Index route: List all organizations for logged-in user
+// Index - List all organizations for logged-in user
 router.get('/', async (req, res) => {
     try {
         const organizations = await Organization.find().populate('owner')
@@ -85,6 +85,24 @@ router.get('/:organizationId/edit', async (req, res) => {
         res.redirect('/')
     }
 })
+
+// PUT /organizatioins/:organizationId
+// Update organization
+router.put('/:organizationId', async (req, res) => {
+    try {
+        const currentOrg = await Organization.findById(req.params.organizationId)
+        if (currentOrg.owner.equals(req.session.user._id)) {
+            await currentOrg.updateOne(req.body)
+            res.redirect('/organizations')
+        } else {
+            res.send("You don't have permission to do that.")
+        }
+    } catch (err) {
+        console.log(err)
+        res.redirect('/')
+    }
+})
+
 
 module.exports = router;
 
