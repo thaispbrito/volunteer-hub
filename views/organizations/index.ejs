@@ -11,16 +11,20 @@
     <%- include('../partials/_navbar.ejs') %>
         <h1>Here's all my organizations:</h1>
         <ul>
+
 			<% if (organizations.length > 0) {%>
 				<% organizations.forEach((organization)=> { %>
-				<li>
-					<%= organization.orgName %>
-					<a href="/organizations/<%= organization._id %>">View more details</a>
-				</li>
+					<% if (organization.owner._id.equals(currentUserId)) { %>	
+						<li>
+							<%= organization.orgName %>
+							<a href="/organizations/<%= organization._id %>">View more details</a>
+						</li>
+					<% } %>
 				<% }) %>
 			<% } else { %>
 				<li> No organizations found. </li>
 			<% } %>
+
         </ul>
 
         <a href="/organizations/new">Add a New Organization</a>

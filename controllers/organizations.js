@@ -9,7 +9,10 @@ const Listing = require('../models/Listing.js')
 router.get('/', async (req, res) => {
     try {
         const organizations = await Organization.find().populate('owner')
-        res.render('organizations/index.ejs', { organizations })  // Make a variable called organizations available to the view
+        res.render('organizations/index.ejs', { 
+            organizations,
+            currentUserId: req.session.user._id,   // Make a variable called organizations and currentUserId available to the view
+        })  
     } catch (err) {
         console.log(err);
         res.redirect('/');
