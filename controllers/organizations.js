@@ -55,7 +55,36 @@ router.get('/:organizationId', async (req, res) => {
     }
 })
 
+// DELETE /organizations/:organizationId
+// Delete organization
+router.delete('/:organizationId', async (req, res) => {
+    try {
+        const organization = await Organization.findById(req.params.organizationId)
+        if (organization.owner.equals(req.session.user._id)) {
+            await organization.deleteOne()
+            res.redirect('/organizations')
+        } else {
+            res.send("You don't have permission to do that.")
+        }
+    } catch (err) {
+        console.error(err)
+        res.redirect('/')
+    }
+})
 
+// GET /organizations/:organizationId/edit
+// Display edit form
+router.get('/:organizationId/edit', async (req, res) => {
+    try {
+        const currentOrg = await Organization.findById(req.params.organizationId)
+        res.render('organizations/edit.ejs', {
+            organization: currentOrg,
+        })
+    } catch (err) {
+        console.log(err)
+        res.redirect('/')
+    }
+})
 
 module.exports = router;
 

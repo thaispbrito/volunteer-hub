@@ -5,7 +5,7 @@ const organizationSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    organization: {
+    orgName: {
         type: String,
         required: true,
     },

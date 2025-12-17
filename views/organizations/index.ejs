@@ -14,7 +14,7 @@
 			<% if (organizations.length > 0) {%>
 				<% organizations.forEach((organization)=> { %>
 				<li>
-					<%= organization.organization %>
+					<%= organization.orgName %>
 					<a href="/organizations/<%= organization._id %>">View more details</a>
 				</li>
 				<% }) %>
