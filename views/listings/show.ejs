@@ -50,5 +50,91 @@
         <p>You must have a volunteer profile to favorite listings.</p>
         <% } %>
 
+        <h2>Comments</h2>
+
+        <% if (comments && comments.length > 0) { %>
+        <% comments.forEach(comment => { %>
+            <div class="comment" data-comment-id="<%= comment._id %>">
+            <strong>
+                <% if (comment.volunteer) { %>
+                <%= comment.volunteer.firstName %> <%= comment.volunteer.lastName %>
+                <% } else if (comment.organization) { %>
+                <%= comment.organization.orgName %>
+                <% } %>
+            </strong>:
+
+            <!-- Display text -->
+            <span class="comment-text"><%= comment.content %></span>
+
+            <% if (comment.user.equals(currentUserId) || (organization && listing.owner._id.equals(organization._id))) { %>
+                <!-- Delete button -->
+                <form method="POST"
+                    action="/listings/<%= listing._id %>/comments/<%= comment._id %>?_method=DELETE"
+                    style="display:inline;">
+                <button>Delete</button>
+                </form>
+
+                <!-- Edit button (only for comment owner) -->
+                <% if (comment.user.equals(currentUserId)) { %>
+                <button class="edit-button">Edit</button>
+
+                <!-- Hidden edit form -->
+                <form class="edit-form" 
+                        action="/listings/<%= listing._id %>/comments/<%= comment._id %>?_method=PUT" 
+                        method="POST" 
+                        style="display:none;">
+                    <textarea name="content" rows="2" required><%= comment.content %></textarea>
+                    <br>
+                    <button type="submit">Update</button>
+                    <button type="button" class="cancel-button">Cancel</button>
+                </form>
+                <% } %>
+            <% } %>
+            </div>
+        <% }) %>
+        <% } else { %>
+        <p>No comments yet. Be the first to comment!</p>
+        <% } %>
+
+        <!-- Add new comment form -->
+        <h3>Add a Comment</h3>
+        <form action="/listings/<%= listing._id %>/comments" method="POST">
+        <textarea name="content" rows="3" required></textarea>
+        <br>
+        <button type="submit">Post Comment</button>
+        </form>
+
+        <!-- Single script for all edit/cancel buttons -->
+        <script>
+            document.addEventListener('click', function(event) {
+                // Edit button clicked
+                if (event.target.matches('.edit-button')) {
+                    const commentSection = event.target.closest('.comment');
+                    commentSection.querySelector('.comment-text').style.display = 'none';
+                    commentSection.querySelector('.edit-form').style.display = 'block';
+
+                    // Hide edit and delete buttons
+                    const editButton = commentSection.querySelector('.edit-button');
+                    const deleteButton = commentSection.querySelector('.delete-button');
+                    if (editButton) editButton.style.display = 'none';
+                    if (deleteButton) deleteButton.style.display = 'none';
+                }
+
+                // Cancel button clicked
+                if (event.target.matches('.cancel-button')) {
+                    const commentSection = event.target.closest('.comment');
+                    commentSection.querySelector('.edit-form').style.display = 'none';
+                    commentSection.querySelector('.comment-text').style.display = 'inline';
+
+                    // Show edit and delete buttons again
+                    const editButton = commentSection.querySelector('.edit-button');
+                    const deleteButton = commentSection.querySelector('.delete-button');
+                    if (editButton) editButton.style.display = 'inline';
+                    if (deleteButton) deleteButton.style.display = 'inline';
+                }
+            });
+        </script>
+
+
     </body>
 </html>

@@ -5,11 +5,11 @@ const Volunteer = require('../models/Volunteer');
 const Listing = require('../models/Listing');
 
 // GET /volunteer/profile
-// View the logged-in user's volunteer profile if any
+// View the logged-in user's volunteer profile
 router.get('/profile', async (req, res) => {
     try {
         const user = req.session.user;
-        if (!user) return res.redirect("/auth/sign-in")
+        // if (!user) return res.redirect("/auth/sign-in")
 
         const volunteer = await Volunteer.findOne({userId: user._id});
         if (!volunteer) {
@@ -61,7 +61,7 @@ router.post('/', async (req, res) => {
 router.get('/edit', async (req, res) => {
     try {
         const user = req.session.user;
-        if (!user) return res.redirect("/auth/sign-in")
+        // if (!user) return res.redirect("/auth/sign-in")
 
         const volunteer = await Volunteer.findOne({userId: user._id});
         res.render('volunteers/edit.ejs', {

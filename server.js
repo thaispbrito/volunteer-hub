@@ -23,6 +23,8 @@ const usersController = require("./controllers/users.js");
 const volunteersController = require("./controllers/volunteers.js");
 const organizationsController = require("./controllers/organizations.js");
 const listingsController = require('./controllers/listings.js')
+const matchesController = require('./controllers/matches.js')
+const commentsController = require('./controllers/comments.js')
 
 mongoose.connect(process.env.MONGODB_URI);
 
@@ -71,6 +73,8 @@ app.use("/", usersController);  // for handling homepage
 app.use("/volunteer", isSignedIn, volunteersController);  // singular URL for one-to-one relationship
 app.use("/organizations", isSignedIn, organizationsController);  // One-to-many relationship
 app.use('/listings', isSignedIn, listingsController);  // One-to-many relationship
+app.use('/matches', isSignedIn, matchesController);  
+app.use('/listings/:listingId/comments', isSignedIn, commentsController);
 
 app.listen(port, () => {
     console.log(`The express app is ready on port ${port}!`);

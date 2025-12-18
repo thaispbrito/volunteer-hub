@@ -2,8 +2,9 @@ const express = require('express')
 const router = express.Router()
 
 const Listing = require('../models/Listing');
-const Organization = require('../models/Organization');
 const Volunteer = require('../models/Volunteer');
+const Organization = require('../models/Organization');
+const Comment = require('../models/Comment');
 
 // GET /listings
 // Index - View all listings from an organization
@@ -17,11 +18,12 @@ router.get('/', async (req, res) => {
     }
 })
 
-// GET /listings/new
+// GET /listings/new/:id
 // Display a form to create new listing
-router.get('/new', (req, res) => {
+router.get('/new/:id', (req, res) => {
     try {
-        res.render('listings/new.ejs')
+        const organization = req.params.id;
+        res.render('listings/new.ejs', { organization });
     } catch (err) {
         console.log(err)
         res.redirect('/')
@@ -30,15 +32,15 @@ router.get('/new', (req, res) => {
 
 // POST /listings
 // Create a new listing
-router.post('/', async (req, res) => {
+router.post('/:id', async (req, res) => {
     try {
-        const org = await Organization.findOne({ owner: req.session.user._id })
+        const org = await Organization.findById(req.params.id );
         if (!org) {
             return res.send("You don't have an organization to create a listing for.")
         }
         req.body.owner = org._id
         await Listing.create(req.body)
-        res.redirect('/listings')
+        res.redirect(`/organizations/${req.params.id}`);
     } catch (err) {
         console.log(err)
         res.redirect('/')
@@ -63,8 +65,11 @@ router.get('/:listingId/edit', async (req, res) => {
 // Update listing
 router.put('/:listingId', async (req, res) => {
     try {
+        const user = req.session.user;
         const currentListing = await Listing.findById(req.params.listingId)
-        if (currentListing.owner.equals(req.session.user._id)) {
+        const organization = await Organization.findOne({ owner: user._id });
+
+        if (currentListing.owner.equals(organization._id)) {
             await currentListing.updateOne(req.body)
             res.redirect('/listings')
         } else {
@@ -80,13 +85,16 @@ router.put('/:listingId', async (req, res) => {
 // Delete listing
 router.delete('/:listingId', async (req, res) => {
     try {
-        const listing = await Listing.findById(req.params.listingId)
-        if (listing.owner.equals(req.session.user._id)) {
+        const user = req.session.user;
+        const listing = await Listing.findById(req.params.listingId);
+        const organization = await Organization.findOne({ owner: user._id });
+
+        if (listing.owner.equals(organization._id)) {
             await listing.deleteOne()
             res.redirect('/listings')
         } else {
             res.send("You don't have permission to do that.")
-        }
+        };
     } catch (err) {
         console.error(err)
         res.redirect('/')
@@ -194,36 +202,89 @@ router.delete('/:listingId/favorite', async (req, res) => {
 
 // GET /listings/:listingId
 // Display a single listing
+// router.get('/:listingId', async (req, res) => {
+//     try {
+//         const listing = await Listing.findById(req.params.listingId)
+//             .populate('owner')
+//             .populate('favoritedByVolunteers')
+
+//         const comments = await Comment.find({
+//             listing: req.params.listingId,
+//         })
+//             .poputale('volunteer', 'firstName lastName')
+//             .populate('organization', 'orgName')
+//             .sort({ createdAt: 1});
+
+//         let volunteer = null
+//         let volunteerHasFavorited = false
+
+//         if (req.session.user) {
+//             volunteer = await Volunteer.findOne({
+//                 userId: req.session.user._id,
+//             })
+
+//             if (volunteer) {
+//                 volunteerHasFavorited = listing.favoritedByVolunteers.some(v =>
+//                     v._id.equals(volunteer._id)
+//                 )
+//             }
+//         }
+//         res.render('listings/show.ejs', {
+//             listing,
+//             comments,
+//             volunteer,
+//             volunteerHasFavorited,
+//             currentUserId: req.session.user?._id,
+//         })
+//     } catch (err) {
+//         console.log(err)
+//         res.redirect('/')
+//     }
+// })
+
+
+// GET /listings/:listingId
+// Display a single listing
 router.get('/:listingId', async (req, res) => {
-    try {
-        const listing = await Listing.findById(req.params.listingId)
-            .populate('owner')
-            .populate('favoritedByVolunteers')
+  try {
+    const listing = await Listing.findById(req.params.listingId)
+      .populate('owner')
+      .populate('favoritedByVolunteers');
 
-        let volunteer = null
-        let volunteerHasFavorited = false
+    const comments = await Comment.find({
+      listing: req.params.listingId,
+    })
+      .populate('volunteer', 'firstName lastName')
+      .populate('organization', 'orgName')
+      .sort({ createdAt: 1 });
 
-        if (req.session.user) {
-            volunteer = await Volunteer.findOne({
-                userId: req.session.user._id,
-            })
+    let volunteer = null;
+    let volunteerHasFavorited = false;
 
-            if (volunteer) {
-                volunteerHasFavorited = listing.favoritedByVolunteers.some(v =>
-                    v._id.equals(volunteer._id)
-                )
-            }
-        }
-        res.render('listings/show.ejs', {
-            listing,
-            volunteer,
-            volunteerHasFavorited,
-            currentUserId: req.session.user._id,
-        })
-    } catch (err) {
-        console.log(err)
-        res.redirect('/')
+    if (req.session.user) {
+      volunteer = await Volunteer.findOne({
+        userId: req.session.user._id,
+      });
+
+      if (volunteer) {
+        volunteerHasFavorited = listing.favoritedByVolunteers.some(v =>
+          v._id.equals(volunteer._id)
+        );
+      }
     }
-})
 
-module.exports = router
+    res.render('listings/show.ejs', {
+      listing,
+      comments,
+      volunteer,
+      volunteerHasFavorited,
+      currentUserId: req.session.user?._id,
+    });
+  } catch (err) {
+    console.log(err);
+    res.redirect('/');
+  }
+});
+
+module.exports = router;
+
