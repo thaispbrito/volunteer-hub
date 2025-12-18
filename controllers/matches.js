@@ -23,7 +23,7 @@ router.get('/', async (req, res) => {
 
         const orgMatches = [];
         for (let org of organizations) {
-            const listings = await Listing.find({ org: org._id });
+            const listings = await Listing.find({ owner: org._id });  // before was org instead of owner
             
             for (let listing of listings) {
                 const volunteers = await Volunteer.find({
@@ -36,6 +36,7 @@ router.get('/', async (req, res) => {
 
         res.render('matches/dashboard.ejs', {
             volunteer,
+            organizations,
             matchingListings,
             orgMatches
         });

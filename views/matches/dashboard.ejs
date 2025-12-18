@@ -2,17 +2,22 @@
 
 <h1>Matching Dashboard</h1>
 
+<h2>Your Volunteer Matches</h2>
 <% if (volunteer && matchingListings && matchingListings.length > 0) { %>
-    <h2>Your Volunteer Matches</h2>
+    <!-- <h2>Your Volunteer Matches</h2> -->
     <% matchingListings.forEach(listing => { %>
-        <p><a href="/listings/<%= listing._id %>"><%= listing.event %></a> in <%= listing.city %></p>
+        <p><a href="/listings/<%= listing._id %>"><%= listing.event %></a> from <%= listing.owner.orgName %></p>
     <% }) %>
 <% } else if (volunteer) { %>
     <p>No matching listings found.</p>
+<% } else if (!volunteer) { %>
+    <p>Create a profile as a volunteer first.</p>
+    <a href="/volunteer/new">Click Here</a>
 <% } %>
 
+<h2>Your Organization Matches</h2>
 <% if (orgMatches && orgMatches.length > 0) { %>
-    <h2>Your Organization Matches</h2>
+    <!-- <h2>Your Organization Matches</h2> -->
     <% orgMatches.forEach(match => { %>
         <h3><%= match.listing.event %> in <%= match.listing.city %></h3>
         <% if (match.volunteers.length > 0) { %>
@@ -22,7 +27,11 @@
         <% } else { %>
             <p>No matching volunteers for this listing.</p>
         <% } %>
-    <% }) %>
-<% } else { %>
-    <p>No listings found for your organization.</p>
+    <% }) %> 
+<% } else if (organizations.length > 0){ %>
+    <p>No matching volunteers found for your organization(s) listings.</p>
+<% } else if (organizations.length === 0){ %>
+    <p>Add an organization first.</p>
+    <a href="/organizations/new">Click Here</a>
 <% } %>
+

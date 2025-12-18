@@ -30,7 +30,7 @@ router.get('/new/:id', (req, res) => {
     }
 })
 
-// POST /listings
+// POST /listings/:id
 // Create a new listing
 router.post('/:id', async (req, res) => {
     try {
@@ -63,43 +63,118 @@ router.get('/:listingId/edit', async (req, res) => {
 
 // PUT /listings/:listingId
 // Update listing
+// router.put('/:listingId', async (req, res) => {
+//     try {
+//         const user = req.session.user;
+//         const currentListing = await Listing.findById(req.params.listingId)
+//         const organization = await Organization.findOne({ owner: user._id });
+
+//         if (currentListing.owner.equals(organization._id)) {
+//             await currentListing.updateOne(req.body)
+//             res.redirect('/listings')
+//         } else {
+//             res.send("You don't have permission to do that.")
+//         }
+//     } catch (err) {
+//         console.log(err)
+//         res.redirect('/')
+//     }
+// })
+
+// PUT /listings/:listingId
+// Update listing
+// router.put('/:listingId', async (req, res) => {
+//     try {
+//         const userId = req.session.user._id;
+
+//         const listing = await Listing
+//             .findById(req.params.listingId)
+//             .populate('owner'); // owner is Organization
+
+//         if (!listing) {
+//             return res.send('Listing not found');
+//         }
+
+//         // listing.owner is now an Organization document
+//         if (listing.owner.owner.equals(userId)) {
+//             await listing.updateOne(req.body);
+//             return res.redirect('/listings');
+//         }
+
+//         res.send("You don't have permission to do that.");
+//     } catch (err) {
+//         console.error(err);
+//         res.redirect('/');
+//     }
+// });
+
+// PUT /listings/:listingId
+// Update listing
 router.put('/:listingId', async (req, res) => {
     try {
-        const user = req.session.user;
-        const currentListing = await Listing.findById(req.params.listingId)
-        const organization = await Organization.findOne({ owner: user._id });
+        const userId = req.session.user._id;
 
-        if (currentListing.owner.equals(organization._id)) {
-            await currentListing.updateOne(req.body)
-            res.redirect('/listings')
-        } else {
-            res.send("You don't have permission to do that.")
+        const listing = await Listing.findById(req.params.listingId);
+        if (!listing) return res.send('Listing not found');
+
+        const organization = await Organization.findById(listing.owner);
+        if (!organization) return res.send('Organization not found');
+
+        if (!organization.owner.equals(userId)) {
+            return res.send("You don't have permission to do that.");
         }
+
+        await listing.updateOne(req.body);
+        res.redirect(`/listings/${req.params.listingId}`);
     } catch (err) {
-        console.log(err)
-        res.redirect('/')
+        console.log(err);
+        res.redirect('/');
     }
-})
+});
+
+// DELETE /listings/:listingId
+// Delete listing
+// router.delete('/:listingId', async (req, res) => {
+//     try {
+//         const user = req.session.user;
+//         const listing = await Listing.findById(req.params.listingId);
+//         const organization = await Organization.findOne({ owner: user._id });
+
+//         if (listing.owner.equals(organization._id)) {
+//             await listing.deleteOne()
+//             res.redirect('/listings')
+//         } else {
+//             res.send("You don't have permission to do that.")
+//         };
+//     } catch (err) {
+//         console.error(err)
+//         res.redirect('/')
+//     }
+// })
 
 // DELETE /listings/:listingId
 // Delete listing
 router.delete('/:listingId', async (req, res) => {
     try {
-        const user = req.session.user;
-        const listing = await Listing.findById(req.params.listingId);
-        const organization = await Organization.findOne({ owner: user._id });
+        const userId = req.session.user._id;
 
-        if (listing.owner.equals(organization._id)) {
-            await listing.deleteOne()
-            res.redirect('/listings')
-        } else {
-            res.send("You don't have permission to do that.")
-        };
+        const listing = await Listing.findById(req.params.listingId);
+        if (!listing) return res.send('Listing not found');
+
+        const organization = await Organization.findById(listing.owner);
+        if (!organization) return res.send('Organization not found');
+
+        if (!organization.owner.equals(userId)) {
+            return res.send("You don't have permission to do that.");
+        }
+
+        await listing.deleteOne();
+        res.redirect(`/organizations/${organization._id}`);
     } catch (err) {
-        console.error(err)
-        res.redirect('/')
+        console.log(err);
+        res.redirect('/');
     }
-})
+});
 
 // POST /listings/:listingId/favorited-by/:userId
 // Mark a listing as favorited by a user
