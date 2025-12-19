@@ -8,114 +8,117 @@
     </head>
     <body>
         <%- include('../partials/_navbar.ejs') %>
-        <h1>Edit Volunteer Profile</h1>
-        <form action="/volunteer/?_method=PUT" method="POST">
-            <label for="title">Title:</label>
-            <input type="text" name="title" id="title" value="<%= volunteer.title %>"/>
 
-            <label for="firstName">Fisrt Name:</label>
-            <input type="text" name="firstName" id="firstName" value="<%= volunteer.firstName %>" />
+        <div class="new-edit-container">
+            <h1>Edit Volunteer Profile</h1>
+            <form action="/volunteer/?_method=PUT" method="POST">
+                <label for="title">Title:</label>
+                <input type="text" name="title" id="title" value="<%= volunteer.title %>"/>
 
-            <label for="lastName">Last Name:</label>
-            <input type="text" name="lastName" id="lastName" value="<%= volunteer.lastName %>" />
+                <label for="firstName">Fisrt Name:</label>
+                <input type="text" name="firstName" id="firstName" value="<%= volunteer.firstName %>" />
 
-            <label for="bio">Bio:</label>
-            <textarea name="bio" id="bio"><%= volunteer.bio %></textarea>
+                <label for="lastName">Last Name:</label>
+                <input type="text" name="lastName" id="lastName" value="<%= volunteer.lastName %>" />
 
-            <label for="cause">Cause:</label>
-            <select name="cause" id="cause">
-                <option value="Human Rights" <%= volunteer.cause === "Human Rights" ? "selected" : "" %>>Human Rights</option>
-                <option value="Community Support" <%= volunteer.cause === "Community Support" ? "selected" : "" %>>Community Support</option>
-                <option value="Environment" <%= volunteer.cause === "Environment" ? "selected" : "" %>>Environment</option>
-                <option value="Animals" <%= volunteer.cause === "Animals" ? "selected" : "" %>>Animals</option>
-                <option value="Health & Wellness" <%= volunteer.cause === "Health & Wellness" ? "selected" : "" %>>Health & Wellness</option>
-                <option value="Social Justice & Equality" <%= volunteer.cause === "Social Justice & Equality" ? "selected" : "" %>>Social Justice & Equality</option>
-                <option value="Arts & Culture" <%= volunteer.cause === "Arts & Culture" ? "selected" : "" %>>Arts & Culture</option>
-                <option value="Disaster & Emergency Relief" <%= volunteer.cause === "Disaster & Emergency Relief" ? "selected" : "" %>>Disaster & Emergency Relief</option>
-                <option value="Education" <%= volunteer.cause === "Education" ? "selected" : "" %>>Education</option>
-                <option value="Technology & Innovation" <%= volunteer.cause === "Technology & Innovation" ? "selected" : "" %>>Technology & Innovation</option>
-            </select>    
+                <label for="bio">Bio:</label>
+                <textarea name="bio" id="bio"><%= volunteer.bio %></textarea>
 
-            <label for="skills">Skills:</label>
-            <input type="text" name="skills" id="skills" value="<%= volunteer.skills %>"/>
+                <label for="cause">Cause:</label>
+                <select name="cause" id="cause">
+                    <option value="Human Rights" <%= volunteer.cause === "Human Rights" ? "selected" : "" %>>Human Rights</option>
+                    <option value="Community Support" <%= volunteer.cause === "Community Support" ? "selected" : "" %>>Community Support</option>
+                    <option value="Environment" <%= volunteer.cause === "Environment" ? "selected" : "" %>>Environment</option>
+                    <option value="Animals" <%= volunteer.cause === "Animals" ? "selected" : "" %>>Animals</option>
+                    <option value="Health & Wellness" <%= volunteer.cause === "Health & Wellness" ? "selected" : "" %>>Health & Wellness</option>
+                    <option value="Social Justice & Equality" <%= volunteer.cause === "Social Justice & Equality" ? "selected" : "" %>>Social Justice & Equality</option>
+                    <option value="Arts & Culture" <%= volunteer.cause === "Arts & Culture" ? "selected" : "" %>>Arts & Culture</option>
+                    <option value="Disaster & Emergency Relief" <%= volunteer.cause === "Disaster & Emergency Relief" ? "selected" : "" %>>Disaster & Emergency Relief</option>
+                    <option value="Education" <%= volunteer.cause === "Education" ? "selected" : "" %>>Education</option>
+                    <option value="Technology & Innovation" <%= volunteer.cause === "Technology & Innovation" ? "selected" : "" %>>Technology & Innovation</option>
+                </select>    
 
-            <label for="modelVol">Volunteering Model:</label>
-            <select name="modelVol" id="modelVol">
-                <option value="inPerson"<%=volunteer.model === "inPerson" ? "selected" : "" %> >In-Person</option>
-                <option value="remote"<%=volunteer.model === "remote" ? "selected" : "" %> >Remote</option>
-            </select>     
+                <label for="skills">Skills:</label>
+                <input type="text" name="skills" id="skills" value="<%= volunteer.skills %>"/>
 
-            <label for="availability">Availability:</label>
-            <input type="text" name="availability" id="availability" value="<%= volunteer.availability %>" />
+                <label for="modelVol">Volunteering Model:</label>
+                <select name="modelVol" id="modelVol">
+                    <option value="In-Person"<%=volunteer.model === "In-Person" ? "selected" : "" %> >In-Person</option>
+                    <option value="Remote"<%=volunteer.model === "Remote" ? "selected" : "" %> >Remote</option>
+                </select>     
 
-            <label for="city">City:</label>
-            <input type="text" name="city" id="city" value="<%= volunteer.city %>" />
+                <label for="availability">Availability:</label>
+                <input type="text" name="availability" id="availability" value="<%= volunteer.availability %>" />
 
-            <label for="state">State:</label>
-            <select name="state" id="state">
-                <option value="AL" <%= volunteer.state === "AL" ? "selected" : "" %>>Alabama - AL</option>
-                <option value="AL" <%= volunteer.state === "AL" ? "selected" : "" %>>Alabama - AL</option>
-                <option value="AK" <%= volunteer.state === "AK" ? "selected" : "" %>>Alaska - AK</option>
-                <option value="AZ" <%= volunteer.state === "AZ" ? "selected" : "" %>>Arizona - AZ</option>
-                <option value="AR" <%= volunteer.state === "AR" ? "selected" : "" %>>Arkansas - AR</option>
-                <option value="CA" <%= volunteer.state === "CA" ? "selected" : "" %>>California - CA</option>
-                <option value="CO" <%= volunteer.state === "CO" ? "selected" : "" %>>Colorado - CO</option>
-                <option value="CT" <%= volunteer.state === "CT" ? "selected" : "" %>>Connecticut - CT</option>
-                <option value="DE" <%= volunteer.state === "DE" ? "selected" : "" %>>Delaware - DE</option>
-                <option value="FL" <%= volunteer.state === "FL" ? "selected" : "" %>>Florida - FL</option>
-                <option value="GA" <%= volunteer.state === "GA" ? "selected" : "" %>>Georgia - GA</option>
-                <option value="HI" <%= volunteer.state === "HI" ? "selected" : "" %>>Hawaii - HI</option>
-                <option value="ID" <%= volunteer.state === "ID" ? "selected" : "" %>>Idaho - ID</option>
-                <option value="IL" <%= volunteer.state === "IL" ? "selected" : "" %>>Illinois - IL</option>
-                <option value="IN" <%= volunteer.state === "IN" ? "selected" : "" %>>Indiana - IN</option>
-                <option value="IA" <%= volunteer.state === "IA" ? "selected" : "" %>>Iowa - IA</option>
-                <option value="KS" <%= volunteer.state === "KS" ? "selected" : "" %>>Kansas - KS</option>
-                <option value="KY" <%= volunteer.state === "KY" ? "selected" : "" %>>Kentucky - KY</option>
-                <option value="LA" <%= volunteer.state === "LA" ? "selected" : "" %>>Louisiana - LA</option>
-                <option value="ME" <%= volunteer.state === "ME" ? "selected" : "" %>>Maine - ME</option>
-                <option value="MD" <%= volunteer.state === "MD" ? "selected" : "" %>>Maryland - MD</option>
-                <option value="MA" <%= volunteer.state === "MA" ? "selected" : "" %>>Massachusetts - MA</option>
-                <option value="MI" <%= volunteer.state === "MI" ? "selected" : "" %>>Michigan - MI</option>
-                <option value="MN" <%= volunteer.state === "MN" ? "selected" : "" %>>Minnesota - MN</option>
-                <option value="MS" <%= volunteer.state === "MS" ? "selected" : "" %>>Mississippi - MS</option>
-                <option value="MO" <%= volunteer.state === "MO" ? "selected" : "" %>>Missouri - MO</option>
-                <option value="MT" <%= volunteer.state === "MT" ? "selected" : "" %>>Montana - MT</option>
-                <option value="NE" <%= volunteer.state === "NE" ? "selected" : "" %>>Nebraska - NE</option>
-                <option value="NV" <%= volunteer.state === "NV" ? "selected" : "" %>>Nevada - NV</option>
-                <option value="NH" <%= volunteer.state === "NH" ? "selected" : "" %>>New Hampshire - NH</option>
-                <option value="NJ" <%= volunteer.state === "NJ" ? "selected" : "" %>>New Jersey - NJ</option>
-                <option value="NM" <%= volunteer.state === "NM" ? "selected" : "" %>>New Mexico - NM</option>
-                <option value="NY" <%= volunteer.state === "NY" ? "selected" : "" %>>New York - NY</option>
-                <option value="NC" <%= volunteer.state === "NC" ? "selected" : "" %>>North Carolina - NC</option>
-                <option value="ND" <%= volunteer.state === "ND" ? "selected" : "" %>>North Dakota - ND</option>
-                <option value="OH" <%= volunteer.state === "OH" ? "selected" : "" %>>Ohio - OH</option>
-                <option value="OK" <%= volunteer.state === "OK" ? "selected" : "" %>>Oklahoma - OK</option>
-                <option value="OR" <%= volunteer.state === "OR" ? "selected" : "" %>>Oregon - OR</option>
-                <option value="PA" <%= volunteer.state === "PA" ? "selected" : "" %>>Pennsylvania - PA</option>
-                <option value="RI" <%= volunteer.state === "RI" ? "selected" : "" %>>Rhode Island - RI</option>
-                <option value="SC" <%= volunteer.state === "SC" ? "selected" : "" %>>South Carolina - SC</option>
-                <option value="SD" <%= volunteer.state === "SD" ? "selected" : "" %>>South Dakota - SD</option>
-                <option value="TN" <%= volunteer.state === "TN" ? "selected" : "" %>>Tennessee - TN</option>
-                <option value="TX" <%= volunteer.state === "TX" ? "selected" : "" %>>Texas - TX</option>
-                <option value="UT" <%= volunteer.state === "UT" ? "selected" : "" %>>Utah - UT</option>
-                <option value="VT" <%= volunteer.state === "VT" ? "selected" : "" %>>Vermont - VT</option>
-                <option value="VA" <%= volunteer.state === "VA" ? "selected" : "" %>>Virginia - VA</option>
-                <option value="WA" <%= volunteer.state === "WA" ? "selected" : "" %>>Washington - WA</option>
-                <option value="WV" <%= volunteer.state === "WV" ? "selected" : "" %>>West Virginia - WV</option>
-                <option value="WI" <%= volunteer.state === "WI" ? "selected" : "" %>>Wisconsin - WI</option>
-                <option value="WY" <%= volunteer.state === "WY" ? "selected" : "" %>>Wyoming - WY</option>
-            </select>  
+                <label for="city">City:</label>
+                <input type="text" name="city" id="city" value="<%= volunteer.city %>" />
 
-            <label for="email">Email:</label>
-            <input type="text" name="email" id="email" value="<%= volunteer.email %>" />
+                <label for="state">State:</label>
+                <select name="state" id="state">
+                    <option value="AL" <%= volunteer.state === "AL" ? "selected" : "" %>>Alabama - AL</option>
+                    <option value="AL" <%= volunteer.state === "AL" ? "selected" : "" %>>Alabama - AL</option>
+                    <option value="AK" <%= volunteer.state === "AK" ? "selected" : "" %>>Alaska - AK</option>
+                    <option value="AZ" <%= volunteer.state === "AZ" ? "selected" : "" %>>Arizona - AZ</option>
+                    <option value="AR" <%= volunteer.state === "AR" ? "selected" : "" %>>Arkansas - AR</option>
+                    <option value="CA" <%= volunteer.state === "CA" ? "selected" : "" %>>California - CA</option>
+                    <option value="CO" <%= volunteer.state === "CO" ? "selected" : "" %>>Colorado - CO</option>
+                    <option value="CT" <%= volunteer.state === "CT" ? "selected" : "" %>>Connecticut - CT</option>
+                    <option value="DE" <%= volunteer.state === "DE" ? "selected" : "" %>>Delaware - DE</option>
+                    <option value="FL" <%= volunteer.state === "FL" ? "selected" : "" %>>Florida - FL</option>
+                    <option value="GA" <%= volunteer.state === "GA" ? "selected" : "" %>>Georgia - GA</option>
+                    <option value="HI" <%= volunteer.state === "HI" ? "selected" : "" %>>Hawaii - HI</option>
+                    <option value="ID" <%= volunteer.state === "ID" ? "selected" : "" %>>Idaho - ID</option>
+                    <option value="IL" <%= volunteer.state === "IL" ? "selected" : "" %>>Illinois - IL</option>
+                    <option value="IN" <%= volunteer.state === "IN" ? "selected" : "" %>>Indiana - IN</option>
+                    <option value="IA" <%= volunteer.state === "IA" ? "selected" : "" %>>Iowa - IA</option>
+                    <option value="KS" <%= volunteer.state === "KS" ? "selected" : "" %>>Kansas - KS</option>
+                    <option value="KY" <%= volunteer.state === "KY" ? "selected" : "" %>>Kentucky - KY</option>
+                    <option value="LA" <%= volunteer.state === "LA" ? "selected" : "" %>>Louisiana - LA</option>
+                    <option value="ME" <%= volunteer.state === "ME" ? "selected" : "" %>>Maine - ME</option>
+                    <option value="MD" <%= volunteer.state === "MD" ? "selected" : "" %>>Maryland - MD</option>
+                    <option value="MA" <%= volunteer.state === "MA" ? "selected" : "" %>>Massachusetts - MA</option>
+                    <option value="MI" <%= volunteer.state === "MI" ? "selected" : "" %>>Michigan - MI</option>
+                    <option value="MN" <%= volunteer.state === "MN" ? "selected" : "" %>>Minnesota - MN</option>
+                    <option value="MS" <%= volunteer.state === "MS" ? "selected" : "" %>>Mississippi - MS</option>
+                    <option value="MO" <%= volunteer.state === "MO" ? "selected" : "" %>>Missouri - MO</option>
+                    <option value="MT" <%= volunteer.state === "MT" ? "selected" : "" %>>Montana - MT</option>
+                    <option value="NE" <%= volunteer.state === "NE" ? "selected" : "" %>>Nebraska - NE</option>
+                    <option value="NV" <%= volunteer.state === "NV" ? "selected" : "" %>>Nevada - NV</option>
+                    <option value="NH" <%= volunteer.state === "NH" ? "selected" : "" %>>New Hampshire - NH</option>
+                    <option value="NJ" <%= volunteer.state === "NJ" ? "selected" : "" %>>New Jersey - NJ</option>
+                    <option value="NM" <%= volunteer.state === "NM" ? "selected" : "" %>>New Mexico - NM</option>
+                    <option value="NY" <%= volunteer.state === "NY" ? "selected" : "" %>>New York - NY</option>
+                    <option value="NC" <%= volunteer.state === "NC" ? "selected" : "" %>>North Carolina - NC</option>
+                    <option value="ND" <%= volunteer.state === "ND" ? "selected" : "" %>>North Dakota - ND</option>
+                    <option value="OH" <%= volunteer.state === "OH" ? "selected" : "" %>>Ohio - OH</option>
+                    <option value="OK" <%= volunteer.state === "OK" ? "selected" : "" %>>Oklahoma - OK</option>
+                    <option value="OR" <%= volunteer.state === "OR" ? "selected" : "" %>>Oregon - OR</option>
+                    <option value="PA" <%= volunteer.state === "PA" ? "selected" : "" %>>Pennsylvania - PA</option>
+                    <option value="RI" <%= volunteer.state === "RI" ? "selected" : "" %>>Rhode Island - RI</option>
+                    <option value="SC" <%= volunteer.state === "SC" ? "selected" : "" %>>South Carolina - SC</option>
+                    <option value="SD" <%= volunteer.state === "SD" ? "selected" : "" %>>South Dakota - SD</option>
+                    <option value="TN" <%= volunteer.state === "TN" ? "selected" : "" %>>Tennessee - TN</option>
+                    <option value="TX" <%= volunteer.state === "TX" ? "selected" : "" %>>Texas - TX</option>
+                    <option value="UT" <%= volunteer.state === "UT" ? "selected" : "" %>>Utah - UT</option>
+                    <option value="VT" <%= volunteer.state === "VT" ? "selected" : "" %>>Vermont - VT</option>
+                    <option value="VA" <%= volunteer.state === "VA" ? "selected" : "" %>>Virginia - VA</option>
+                    <option value="WA" <%= volunteer.state === "WA" ? "selected" : "" %>>Washington - WA</option>
+                    <option value="WV" <%= volunteer.state === "WV" ? "selected" : "" %>>West Virginia - WV</option>
+                    <option value="WI" <%= volunteer.state === "WI" ? "selected" : "" %>>Wisconsin - WI</option>
+                    <option value="WY" <%= volunteer.state === "WY" ? "selected" : "" %>>Wyoming - WY</option>
+                </select>  
 
-            <label for="phone">Phone:</label>
-            <input type="text" name="phone" id="phone" value="<%= volunteer.phone %>" />
+                <label for="email">Email:</label>
+                <input type="text" name="email" id="email" value="<%= volunteer.email %>" />
 
-            <label for="comments">Additional Comments:</label>
-            <textarea name="comments" id="comments"><%= volunteer.comments %></textarea>
+                <label for="phone">Phone:</label>
+                <input type="text" name="phone" id="phone" value="<%= volunteer.phone %>" />
 
-            <button type="submit">Update Profile</button>
-        </form>
+                <label for="comments">Additional Comments:</label>
+                <textarea name="comments" id="comments"><%= volunteer.comments %></textarea>
+
+                <button type="submit">Update Profile</button>
+            </form>
+        </div>
     </body>
 </html>

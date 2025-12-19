@@ -9,40 +9,39 @@
     </head>
 
     <body>
-        <%- include('../partials/_navbar.ejs') %>
-        <h1>My Volunteer Profile</h1>
-        <h3><%= volunteer.title %></h3>
-        <p>Name: <%= volunteer.firstName %> <%= volunteer.lastName %></p>
-        <p>Bio: <%= volunteer.bio %></p>
-        <p>Cause: <%= volunteer.cause %></p>
-        <p>Skills: <%= volunteer.skills %></p>
-        <p>Volunteering Model: <%= volunteer.modelVol %></p>
-        <p>Cause: <%= volunteer.cause %></p>
-        <p>Availability: <%= volunteer.availability %></p>
-        <p>Location: <%= volunteer.city %>, <%= volunteer.state %></p>
-        <p>Email Address: <%= volunteer.email %></p>
-        <p>Phone Number: <%= volunteer.phone %></p>
-        <p>Additional Comments: <%= volunteer.comments %></p>
+         <%- include('../partials/_navbar.ejs') %>
+        <div class="show-container">
+            <h1>My Volunteer Profile</h1>
+            <h3><%= volunteer.title %></h3>
 
-        <h3>Likes</h2>
-        <p>You liked <%=myFavoriteListings.length%> listings</p>
-        <ul>
-            <% myFavoriteListings.forEach((listing) => { %>
-            <li>
-                A listing for the <%= listing.event %> event owned by <%=listing.owner.orgName %>.
-                <a href="/listings/<%= listing._id %>">View more details.</a>
-            </li>
-            <% }) %>
-        </ul>
+            <p><span class="title">Name:</span> <span class="value"><%= volunteer.firstName %> <%= volunteer.lastName %></span></p>
+            <p><span class="title">Bio:</span> <span class="value"><%= volunteer.bio %></span></p>
+            <p><span class="title">Cause:</span> <span class="value"><%= volunteer.cause %></span></p>
+            <p><span class="title">Skills:</span> <span class="value"><%= volunteer.skills %></span></p>
+            <p><span class="title">Volunteering Model:</span> <span class="value"><%= volunteer.modelVol %></span></p>
+            <p><span class="title">Availability:</span> <span class="value"><%= volunteer.availability %></span></p>
+            <p><span class="title">Location:</span> <span class="value"><%= volunteer.city %>, <%= volunteer.state %></span></p>
+            <p><span class="title">Email Address:</span> <span class="value"><%= volunteer.email %></span></p>
+            <p><span class="title">Phone Number:</span> <span class="value"><%= volunteer.phone %></span></p>
+            <p><span class="title">Additional Comments:</span> <span class="value"><%= volunteer.comments %></span></p>
 
-        <a href="/volunteer/edit">Edit Profile</a>
-        <form
-            action="/volunteer/?_method=DELETE"
-            method="POST"
-        >
-            <button type="submit">Delete Profile</button>
-        </form>
+            <h3>Likes</h2>
+            <p>You liked <%=myFavoriteListings.length%> listings</p>
+            <ul>
+                <% myFavoriteListings.forEach((listing) => { %>
+                <li>
+                    <%= listing.event %> event owned by <%=listing.owner.orgName %>.
+                    <a href="/listings/<%= listing._id %>" class="view-details">View more details.</a>
+                </li>
+                <% }) %>
+            </ul>
 
+            <div class="profile-actions">
+                <a href="/volunteer/edit" class="action-button">Edit Profile</a>
+                <form action="/volunteer/?_method=DELETE" method="POST">
+                    <button type="submit" class="action-button">Delete Profile</button>
+                </form>
+            </div>
+        </div>
     </body>
-
 </html>

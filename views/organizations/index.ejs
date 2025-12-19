@@ -10,23 +10,27 @@
 
 	<body>
 		<%- include('../partials/_navbar.ejs') %>
+
+		<div class="index-container">
 			<h1>Here's all my organizations:</h1>
-			<ul>
-				<% if (organizations.length > 0) {%>
+
+			<% if (organizations.length > 0) {%>
+				<div class="card-container">
 					<% organizations.forEach((organization)=> { %>
 						<% if (organization.owner._id.equals(currentUserId)) { %>	
-							<li>
-								<%= organization.orgName %>
-								<a href="/organizations/<%= organization._id %>">View more details</a>
-							</li>
+								<div class="organization-card">
+									<h3><%= organization.orgName %></h3>
+									<a href="/organizations/<%= organization._id %>" class="view-details">View more details</a>
+								</div>
 						<% } %>
 					<% }) %>
-				<% } else { %>
-					<li> No organizations found. </li>
-				<% } %>
-			</ul>
+				</div>
+			<% } else { %>
+				<p> No organizations found. </p>
+			<% } %>
 
-			<a href="/organizations/new">Add a New Organization</a>
+			<a href="/organizations/new" class="action-button">Add a New Organization</a>
+		</div>
 	</body>
 
 </html>

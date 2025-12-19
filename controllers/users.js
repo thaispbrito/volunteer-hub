@@ -17,10 +17,10 @@ router.get("/", async (req, res, next) => {
     }
     res.render('index.ejs', { user, volunteer, organizations });  // Make variables called user, volunteer, and organizations available to the view
 
-  } catch (err) {
+	} catch (err) {
 	console.log(err);
     res.redirect("/");
-  }
+	}
 });
 
 module.exports = router;

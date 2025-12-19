@@ -8,42 +8,45 @@
     </head>
     <body>
         <%- include('../partials/_navbar.ejs') %>
+
+        <div class="new-edit-container">
         <h1>Add New Organization</h1>
-        <form action="/organizations" method="POST">
-            <label for="slogan">Slogan:</label>
-            <input type="text" name="slogan" id="slogan" required/>
+            <form action="/organizations" method="POST">
+                <label for="slogan">Slogan:</label>
+                <input type="text" name="slogan" id="slogan" required/>
 
-            <label for="orgName">Organization Name:</label>
-            <input type="text" name="orgName" id="orgName" required />
+                <label for="orgName">Organization Name:</label>
+                <input type="text" name="orgName" id="orgName" required />
 
-            <label for="story">Our Story:</label>
-            <textarea name="story" id="story"></textarea>
+                <label for="story">Our Story:</label>
+                <textarea name="story" id="story"></textarea>
 
-            <label for="cause">Cause:</label>
-            <select name="cause" id="cause" required>
-                <option value="" selected disabled hidden>Select an option</option>
-                <option value="Human Rights">Human Rights</option>
-                <option value="Community Support">Community Support</option>
-                <option value="Environment">Environment</option>
-                <option value="Animals">Animals</option>
-                <option value="Health & Wellness">Health & Wellness</option>
-                <option value="Social Justice & Equality">Social Justice & Equality</option>
-                <option value="Arts & Culture">Arts & Culture</option>
-                <option value="Disaster & Emergency Relief">Disaster & Emergency Relief</option>
-                <option value="Education">Education</option>
-                <option value="Technology & Innovation">Technology & Innovation</option>                
-            </select>     
+                <label for="cause">Cause:</label>
+                <select name="cause" id="cause" required>
+                    <option value="" selected disabled hidden>Select an option</option>
+                    <option value="Human Rights">Human Rights</option>
+                    <option value="Community Support">Community Support</option>
+                    <option value="Environment">Environment</option>
+                    <option value="Animals">Animals</option>
+                    <option value="Health & Wellness">Health & Wellness</option>
+                    <option value="Social Justice & Equality">Social Justice & Equality</option>
+                    <option value="Arts & Culture">Arts & Culture</option>
+                    <option value="Disaster & Emergency Relief">Disaster & Emergency Relief</option>
+                    <option value="Education">Education</option>
+                    <option value="Technology & Innovation">Technology & Innovation</option>                
+                </select>     
 
-            <label for="headquarters"> Headquarters Address:</label>
-            <input type="headquarters" name="headquarters" id="headquarters" required />
+                <label for="headquarters"> Headquarters Address:</label>
+                <input type="headquarters" name="headquarters" id="headquarters" required />
 
-            <label for="email">Email Address:</label>
-            <input type="email" name="email" id="email" required />
+                <label for="email">Email Address:</label>
+                <input type="email" name="email" id="email" required />
 
-            <label for="phone">Phone Number:</label>
-            <input type="phone" name="phone" id="phone" required />
+                <label for="phone">Phone Number:</label>
+                <input type="phone" name="phone" id="phone" required />
 
-            <button type="submit">Create Profile</button>
-        </form>
+                <button type="submit">Create Profile</button>
+            </form>
+        </div>
     </body>
 </html>

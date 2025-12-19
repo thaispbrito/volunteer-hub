@@ -8,18 +8,22 @@
     </head>
     <body>
         <%- include('../partials/_navbar.ejs') %>
-        <h1>Here's all the Listings</h1>
-        <% if(listings.length === 0) { %>
-            <p> No listings available. </p>
-        <% } %>
-        <ul>
-            <% listings.forEach((listing) => { %>
-            <li>
-                A listing for the <%= listing.event %> owned by <%=
-                listing.owner.orgName %>.
-                <a href="/listings/<%= listing._id %>">View more details.</a>
-            </li>
-            <% }) %>
-        </ul>
+
+        <div class="index-container">
+            <h1>Here's all the Listings</h1>
+
+            <% if(listings.length === 0) { %>
+                <p>No listings available.</p>
+            <% } else { %>
+                <div class="card-container">
+                    <% listings.forEach((listing) => { %>
+                        <div class="listing-card">
+                            <h4><%= listing.event %> owned by <%= listing.owner.orgName %></h4>
+                            <a href="/listings/<%= listing._id %>" class="view-details">View more details</a>
+                        </div>
+                    <% }) %>
+                </div>
+            <% } %>
+        </div>
     </body>
 </html>

@@ -8,42 +8,45 @@
     </head>
     <body>
         <%- include('../partials/_navbar.ejs') %>
-        <h1>Edit <%= organization.orgName %></h1>
-        <form action="/organizations/<%= organization._id %>?_method=PUT" method="POST">
 
-            <label for="slogan">Slogan:</label>
-            <input type="text" name="slogan" id="slogan" value="<%= organization.slogan %>"/>
+        <div class="new-edit-container">
+            <h1>Edit <%= organization.orgName %></h1>
+            <form action="/organizations/<%= organization._id %>?_method=PUT" method="POST">
 
-            <label for="orgName">Organization Name:</label>
-            <input type="text" name="orgName" id="orgName" value="<%= organization.orgName %>" />
+                <label for="slogan">Slogan:</label>
+                <input type="text" name="slogan" id="slogan" value="<%= organization.slogan %>"/>
 
-            <label for="story">Our Story:</label>
-            <textarea name="story" id="story"><%= organization.story %></textarea>
+                <label for="orgName">Organization Name:</label>
+                <input type="text" name="orgName" id="orgName" value="<%= organization.orgName %>" />
 
-            <label for="cause">Cause:</label>
-            <select name="cause" id="cause">
-                <option value="Human Rights" <%= organization.cause === "Human Rights" ? "selected" : "" %>>Human Rights</option>
-                <option value="Community Support" <%= organization.cause === "Community Support" ? "selected" : "" %>>Community Support</option>
-                <option value="Environment" <%= organization.cause === "Environment" ? "selected" : "" %>>Environment</option>
-                <option value="Animals" <%= organization.cause === "Animals" ? "selected" : "" %>>Animals</option>
-                <option value="Health & Wellness" <%= organization.cause === "Health & Wellness" ? "selected" : "" %>>Health & Wellness</option>
-                <option value="Social Justice & Equality" <%= organization.cause === "Social Justice & Equality" ? "selected" : "" %>>Social Justice & Equality</option>
-                <option value="Arts & Culture" <%= organization.cause === "Arts & Culture" ? "selected" : "" %>>Arts & Culture</option>
-                <option value="Disaster & Emergency Relief" <%= organization.cause === "Disaster & Emergency Relief" ? "selected" : "" %>>Disaster & Emergency Relief</option>
-                <option value="Education" <%= organization.cause === "Education" ? "selected" : "" %>>Education</option>
-                <option value="Technology & Innovation" <%= organization.cause === "Technology & Innovation" ? "selected" : "" %>>Technology & Innovation</option>
-            </select>
-   
-            <label for="headquarters"> Headquarters Address:</label>
-            <input type="headquarters" name="headquarters" id="headquarters" value="<%=organization.headquarters%>" />
+                <label for="story">Our Story:</label>
+                <textarea name="story" id="story"><%= organization.story %></textarea>
 
-            <label for="email">Email Address:</label>
-            <input type="email" name="email" id="email" value="<%=organization.email%>" />
+                <label for="cause">Cause:</label>
+                <select name="cause" id="cause">
+                    <option value="Human Rights" <%= organization.cause === "Human Rights" ? "selected" : "" %>>Human Rights</option>
+                    <option value="Community Support" <%= organization.cause === "Community Support" ? "selected" : "" %>>Community Support</option>
+                    <option value="Environment" <%= organization.cause === "Environment" ? "selected" : "" %>>Environment</option>
+                    <option value="Animals" <%= organization.cause === "Animals" ? "selected" : "" %>>Animals</option>
+                    <option value="Health & Wellness" <%= organization.cause === "Health & Wellness" ? "selected" : "" %>>Health & Wellness</option>
+                    <option value="Social Justice & Equality" <%= organization.cause === "Social Justice & Equality" ? "selected" : "" %>>Social Justice & Equality</option>
+                    <option value="Arts & Culture" <%= organization.cause === "Arts & Culture" ? "selected" : "" %>>Arts & Culture</option>
+                    <option value="Disaster & Emergency Relief" <%= organization.cause === "Disaster & Emergency Relief" ? "selected" : "" %>>Disaster & Emergency Relief</option>
+                    <option value="Education" <%= organization.cause === "Education" ? "selected" : "" %>>Education</option>
+                    <option value="Technology & Innovation" <%= organization.cause === "Technology & Innovation" ? "selected" : "" %>>Technology & Innovation</option>
+                </select>
+    
+                <label for="headquarters"> Headquarters Address:</label>
+                <input type="headquarters" name="headquarters" id="headquarters" value="<%=organization.headquarters%>" />
 
-            <label for="phone">Phone Number:</label>
-            <input type="phone" name="phone" id="phone" value="<%=organization.phone%>" />
+                <label for="email">Email Address:</label>
+                <input type="email" name="email" id="email" value="<%=organization.email%>" />
 
-            <button type="submit">Update</button>
-        </form>
+                <label for="phone">Phone Number:</label>
+                <input type="phone" name="phone" id="phone" value="<%=organization.phone%>" />
+
+                <button type="submit">Update</button>
+            </form>
+        </div>
     </body>
 </html>

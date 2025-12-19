@@ -24,7 +24,7 @@ router.get('/', async (req, res) => {
 
         const orgMatches = [];
         for (let org of organizations) {
-            const listings = await Listing.find({ owner: org._id });  // before was org instead of owner
+            const listings = await Listing.find({ owner: org._id });  
             
             for (let listing of listings) {
                 const volunteers = await Volunteer.find({

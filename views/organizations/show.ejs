@@ -8,42 +8,41 @@
     </head>
     <body>
         <%- include('../partials/_navbar.ejs') %>
-        <a href="/organizations">Back to My Organizations</a>
+        <a href="/organizations" class="back-button">Back to My Organizations</a>
 
-        <h1><%= organization.orgName %></h1>
+        <div class="show-container">
+            <h1><%= organization.orgName %></h1>
 
-        <h2>Details</h2>
-        <h3><%= organization.slogan %></h3>
-        <p>Our Story: <%= organization.story %></p>
-        <p>Cause: <%= organization.cause %></p>
-        <p>Headquarters Address: <%= organization.headquarters %></p>
-        <p>Email Address: <%= organization.email %></p>
-        <p>Phone Number: <%= organization.phone %></p>
+            <h2><%= organization.slogan %></h2>
 
-        <a href="/organizations/<%= organization._id %>/edit">Edit Profile</a>
-        <form
-            action="/organizations/<%= organization._id %>?_method=DELETE"
-            method="POST"
-        >
-            <button type="submit">Delete Profile</button>
-        </form>
+            <p><span class="title">Our Story</span>: <span class="value"><%= organization.story %></span></p>
+            <p><span class="title">Cause</span>: <span class="value"><%= organization.cause %></span></p>
+            <p><span class="title">Headquarters Address</span>: <span class="value"><%= organization.headquarters %></span></p>
+            <p><span class="title">Email Address</span>: <span class="value"><%= organization.email %></span></p>
+            <p><span class="title">Phone Number</span>: <span class="value"><%= organization.phone %></span></p>
+       
+            <div class="profile-actions">
+                <a href="/organizations/<%= organization._id %>/edit" class="action-button">Edit Profile</a>
+                <form action="/organizations/<%= organization._id %>?_method=DELETE" method="POST">
+                    <button type="submit" class="action-button">Delete Profile</button>
+                </form>
+            </div>
 
+            <h2>Listings</h2>
+            <p>
+                You own <%= myListings.length %> <%= myListings.length === 1 ?
+                'listing.' : 'listings.' %>
+            </p>
+            <ul>
+                <% myListings.forEach((listing) => { %>
+                <li>
+                    A listing for the <%= listing.event %> event
+                    <a href="/listings/<%= listing._id %>" class="view-details">View more details</a>
+                </li>
+                <% }) %>
+            </ul>
 
-        <h2>Listings</h2>
-        <p>
-            You own <%= myListings.length %> <%= myListings.length === 1 ?
-            'listing.' : 'listings.' %>
-        </p>
-        <ul>
-            <% myListings.forEach((listing) => { %>
-            <li>
-                A listing for the <%= listing.event %> event
-                <a href="/listings/<%= listing._id %>">View more details.</a>
-            </li>
-            <% }) %>
-        </ul>
-
-        <a href="/listings/new/<%= organization._id %>">Add a New Listing</a>
-
+            <a href="/listings/new/<%= organization._id %>">Add a New Listing</a>
+        </div>
     </body>
 </html>
