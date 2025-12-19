@@ -33,9 +33,9 @@
         <p><%= listing.owner.orgName %> organization</p>
         <% } %>
 
-        <h2>Favorites</h2>
+        <h2>Likes</h2>
 
-        <p>Favorited by <%= listing.favoritedByVolunteers.length %> volunteers.</p>
+        <p><%= listing.favoritedByVolunteers.length %> volunteers liked this listing</p>
 
         <% if (volunteer) { %>
             <% if (volunteerHasFavorited) { %>
@@ -58,7 +58,7 @@
                         <% if (comment.volunteer) { %>
                             <%= comment.volunteer.firstName %> <%= comment.volunteer.lastName %>
                         <% } else if (comment.organization) { %>
-                            <%= comment.organization.orgName %>
+                            <%= comment.organization.orgName%>
                         <% } %>
                     </strong>:
 
