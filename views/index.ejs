@@ -4,15 +4,17 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="/stylesheets/style.css" />
         <title>ServeSphere</title>
     </head>
 
     <body>
         <%- include('./partials/_navbar.ejs') %>
+        <div class="landing-image"></div>
 
         <% if (user) { %>
             <h1>Welcome to ServeSphere, <%= user.username %>!</h1>
-            <p>Connecting volunteers and organizations to create positive change.</p>
+            <p> A hub for connecting volunteers and organizations to create positive change.</p>
 
             <!-- If a volunteer profile exists, redirect to the profile -->
             <% if (volunteer) { %>
@@ -31,8 +33,8 @@
             <% } %> 
 
         <% } else { %>
-            <h1>Welcome to ServeSphere!</h1>
-            <p>Connecting volunteers and organizations to create positive change.</p>
+            <h1>Welcome to ServeSphere Hub!</h1>
+            <p> Connecting volunteers and organizations to create positive change.</p>
         <% } %>
     </body>
 

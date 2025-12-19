@@ -18,6 +18,8 @@ const passUserToView = require("./middleware/pass-user-to-view.js");
 // Set the port from environment variable or default to 3000
 const port = process.env.PORT ? process.env.PORT : "3000";
 
+const path = require('path');
+
 const authController = require("./controllers/auth.js");
 const usersController = require("./controllers/users.js");
 const volunteersController = require("./controllers/volunteers.js");
@@ -40,6 +42,9 @@ app.use(methodOverride("_method"));
 
 // Morgan for logging HTTP requests
 app.use(morgan('dev'));
+
+// Middleware for css rules
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Sessions within browser
 // Create a session for every request

@@ -71,6 +71,7 @@ const volunteerSchema = new mongoose.Schema({
     },
     phone: {
         type: String,
+        equired: true,
     },
     comments: {
         type: String,

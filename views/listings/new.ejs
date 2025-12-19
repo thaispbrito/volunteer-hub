@@ -3,6 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="/stylesheets/style.css" />
         <title>Add New Listing</title>
     </head>
     <body>
@@ -18,7 +19,7 @@
 
            <label for="cause">Cause:</label>
             <select name="cause" id="cause" required>
-                <option value="" disabled selected>Choose a cause</option>
+                <option value="" selected disabled hidden>Select an option</option>
                 <option value="Human Rights">Human Rights</option>
                 <option value="Community Support">Community Support</option>
                 <option value="Environment">Environment</option>
@@ -36,11 +37,12 @@
 
             <label for="modelVol">Volunteering Model:</label>
             <select name="modelVol" id="modelVol" required>
+                <option value="" selected disabled hidden>Select an option</option>
                 <option value="In-Person">In-Person</option>
                 <option value="Remote">Remote</option>
             </select>   
             
-            <label for="streetAddress">Street address:</label>
+            <label for="streetAddress">Meetup Location:</label>
             <input type="text" name="streetAddress" id="street" required/>
 
             <label for="city">City:</label>
@@ -48,6 +50,7 @@
 
             <label for="state">State:</label>
             <select name="state" id="state" required>
+                <option value="" selected disabled hidden>Select an option</option>
                 <option value="AL">Alabama - AL</option>
                 <option value="AK">Alaska - AK</option>
                 <option value="AZ">Arizona - AZ</option>
@@ -106,7 +109,7 @@
             <label for="contactInfo">Contact Info:</label>
             <input type="contactInfo" name="contactInfo" id="contactInfo"/>
 
-            <button type="submit">Add</button>
+            <button type="submit">Add Listing</button>
             
         </form>
     </body>
