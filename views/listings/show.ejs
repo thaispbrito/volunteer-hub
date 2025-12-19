@@ -7,26 +7,26 @@
     </head>
     <body>
         <%- include('../partials/_navbar.ejs') %>
-
+        <a href="/organizations/<%= organization._id %>">Back to <%= organization.orgName %></a>
         <h1><%= listing.event %></h1>
 
         <h2>Details</h2>
+        
         <p>Description: <%= listing.description %></p>
         <p>Cause: <%= listing.cause %></p>
-        <p>Required Skills: $<%= listing.skills %></p>
+        <p>Required Skills: <%= listing.skills %></p>
+        <p>Volunteering Model: <%= listing.modelVol %></p>
         <p>Street address: <%= listing.streetAddress %></p>  
-        <p>City: <%= listing.city %></p>
+        <p>City & State: <%= listing.city %>, <%= listing.state %></p>
         <p>Event Schedule: <%= listing.schedule %></p>
+        <p>Contact Information: <%= listing.contactInfo %></p>
         
         <h2>Owner</h2>
         <% if (listing.owner.owner.equals(currentUserId)) { %>
         <p>You own this!</p>
         <a href="/listings/<%= listing._id %>/edit">Edit this listing</a>
-        <form
-            action="/listings/<%= listing._id %>?_method=DELETE"
-            method="POST"
-        >
-            <button type="submit">Delete this listing</button>
+        <form action="/listings/<%= listing._id %>?_method=DELETE" method="POST">
+            <button type="submit">Delete</button>
         </form>
         <% } else { %>
         <p>You don't own this, <%= listing.owner.orgName %> does!</p>
@@ -51,47 +51,48 @@
         <h2>Comments</h2>
 
         <% if (comments && comments.length > 0) { %>
-        <% comments.forEach(comment => { %>
-            <div class="comment" data-comment-id="<%= comment._id %>">
-            <strong>
-                <% if (comment.volunteer) { %>
-                <%= comment.volunteer.firstName %> <%= comment.volunteer.lastName %>
-                <% } else if (comment.organization) { %>
-                <%= comment.organization.orgName %>
-                <% } %>
-            </strong>:
+            <% comments.forEach(comment => { %>
+                <div class="comment" data-comment-id="<%= comment._id %>">
+                    <strong>
+                        <% if (comment.volunteer) { %>
+                            <%= comment.volunteer.firstName %> <%= comment.volunteer.lastName %>
+                        <% } else if (comment.organization) { %>
+                            <%= comment.organization.orgName %>
+                        <% } %>
+                    </strong>:
 
-            <!-- Display text -->
-            <span class="comment-text"><%= comment.content %></span>
+                    <!-- Display text -->
+                    <span class="comment-text"><%= comment.content %></span>
 
-            <% if (comment.user.equals(currentUserId) || (organization && listing.owner._id.equals(organization._id))) { %>
-                <!-- Delete button -->
-                <form method="POST"
-                    action="/listings/<%= listing._id %>/comments/<%= comment._id %>?_method=DELETE"
-                    style="display:inline;">
-                <button>Delete</button>
-                </form>
+                    <% if (comment.user.equals(currentUserId) || (organization && listing.owner._id.equals(organization._id))) { %>
+                        
+                        <!-- Delete button -->
+                        <form method="POST"
+                            action="/listings/<%= listing._id %>/comments/<%= comment._id %>?_method=DELETE"
+                            style="display:inline;">
+                        <button>Delete</button>
+                        </form>
 
-                <!-- Edit button (only for comment owner) -->
-                <% if (comment.user.equals(currentUserId)) { %>
-                <button class="edit-button">Edit</button>
+                        <!-- Edit button (only for comment owner) -->
+                        <% if (comment.user.equals(currentUserId)) { %>
+                            <button class="edit-button">Edit</button>
 
-                <!-- Hidden edit form -->
-                <form class="edit-form" 
-                        action="/listings/<%= listing._id %>/comments/<%= comment._id %>?_method=PUT" 
-                        method="POST" 
-                        style="display:none;">
-                    <textarea name="content" rows="2" required><%= comment.content %></textarea>
-                    <br>
-                    <button type="submit">Update</button>
-                    <button type="button" class="cancel-button">Cancel</button>
-                </form>
-                <% } %>
-            <% } %>
-            </div>
-        <% }) %>
+                            <!-- Hidden edit form -->
+                            <form class="edit-form" 
+                                    action="/listings/<%= listing._id %>/comments/<%= comment._id %>?_method=PUT" 
+                                    method="POST" 
+                                    style="display:none;">
+                                <textarea name="content" rows="2" required><%= comment.content %></textarea>
+                                <br>
+                                <button type="submit">Update</button>
+                                <button type="button" class="cancel-button">Cancel</button>
+                            </form>
+                        <% } %>
+                    <% } %>
+                </div>
+            <% }) %>
         <% } else { %>
-        <p>No comments yet. Be the first to comment!</p>
+            <p>No comments yet. Be the first to comment!</p>
         <% } %>
 
         <!-- Add new comment form -->
@@ -132,7 +133,5 @@
                 }
             });
         </script>
-
-
     </body>
 </html>

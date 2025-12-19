@@ -3,19 +3,21 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title><%= organization.orgName %>'s profile</title>
+        <title><%= organization.orgName %>'s Profile</title>
     </head>
     <body>
         <%- include('../partials/_navbar.ejs') %>
+        <a href="/organizations">Back to My Organizations</a>
 
         <h1><%= organization.orgName %></h1>
 
         <h2>Details</h2>
         <h3><%= organization.slogan %></h3>
-        <p>Cause: <%= organization.cause %></p>
         <p>Our Story: <%= organization.story %></p>
-        <p>Headquarters: <%= organization.headquarters %></p>
-        <p>Contact Information: <%= organization.contactInfo %></p>
+        <p>Cause: <%= organization.cause %></p>
+        <p>Headquarters Address: <%= organization.headquarters %></p>
+        <p>Email Address: <%= organization.email %></p>
+        <p>Phone Number: <%= organization.phone %></p>
 
         <a href="/organizations/<%= organization._id %>/edit">Edit Profile</a>
         <form
@@ -41,8 +43,6 @@
         </ul>
 
         <a href="/listings/new/<%= organization._id %>">Add a New Listing</a>
-
-        <a href="/organizations">Back to My Organizations</a>
 
     </body>
 </html>

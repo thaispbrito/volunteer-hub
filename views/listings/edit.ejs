@@ -7,74 +7,106 @@
     </head>
     <body>
         <%- include('../partials/_navbar.ejs') %>
-        <h1>Edit a Listing!</h1>
+        <h1>Edit this Listing</h1>
 
         <form action="/listings/<%= listing._id %>?_method=PUT" method="POST">
             <label for="event">Event:</label>
-            <input
-                type="text"
-                name="event"
-                id="event"
-                value="<%= listing.event %>"
-            />
+            <input type="text" name="event" id="event" value="<%= listing.event %>"/>
+
             <label for="description">Description:</label>
             <textarea name="description" id="description"><%= listing.description %></textarea>
 
-
             <label for="cause">Cause:</label>
             <select name="cause" id="cause">
-                <option 
-                    value="A"
-                    <%=listing.cause === "A" ? "selected" : "" %>
-                >
-                    A
-                </option>
-				<option 
-                    value="B"
-                    <%=listing.cause === "B" ? "selected" : "" %>
-                >
-                    B
-                </option>
-				<option 
-                    value="C"
-                    <%=listing.cause === "C" ? "selected" : "" %>
-                >
-                    C
-                </option>
-				<option 
-                    value="D"
-                    <%=listing.cause === "D" ? "selected" : "" %>
-                >
-                    D
-                </option>
-            </select>    
+                <option value="Human Rights" <%= listing.cause === "Human Rights" ? "selected" : "" %>>Human Rights</option>
+                <option value="Community Support" <%= listing.cause === "Community Support" ? "selected" : "" %>>Community Support</option>
+                <option value="Environment" <%= listing.cause === "Environment" ? "selected" : "" %>>Environment</option>
+                <option value="Animals" <%= listing.cause === "Animals" ? "selected" : "" %>>Animals</option>
+                <option value="Health & Wellness" <%= listing.cause === "Health & Wellness" ? "selected" : "" %>>Health & Wellness</option>
+                <option value="Social Justice & Equality" <%= listing.cause === "Social Justice & Equality" ? "selected" : "" %>>Social Justice & Equality</option>
+                <option value="Arts & Culture" <%= listing.cause === "Arts & Culture" ? "selected" : "" %>>Arts & Culture</option>
+                <option value="Disaster & Emergency Relief" <%= listing.cause === "Disaster & Emergency Relief" ? "selected" : "" %>>Disaster & Emergency Relief</option>
+                <option value="Education" <%= listing.cause === "Education" ? "selected" : "" %>>Education</option>
+                <option value="Technology & Innovation" <%= listing.cause === "Technology & Innovation" ? "selected" : "" %>>Technology & Innovation</option>
+            </select> 
 
             <label for="skills">Required Skills:</label>
             <textarea name="skills" id="skills"><%= listing.skills %></textarea>
+
+            <label for="modelVol">Volunteering Model:</label>
+            <select name="modelVol" id="modelVol">
+                <option value="inPerson"<%=listing.model === "inPerson" ? "selected" : "" %> >In-Person</option>
+                <option value="remote"<%=listing.model === "remote" ? "selected" : "" %> >Remote</option>
+            </select>    
             
             <label for="streetAddress">Street address:</label>
-            <input
-                type="text"
-                name="streetAddress"
-                id="street"
-                value="<%= listing.streetAddress %>"
-            />
-            <label for="city">City:</label>
-            <input
-                type="text"
-                name="city"
-                id="city"
-                value="<%= listing.city %>"
-            />
-            <label for="schedule">Event Schedule:</label>
-            <input
-                type="schedule"
-                name="schedule"
-                id="schedule"
-                value="<%= listing.schedule %>"
-            />
+            <input type="text" name="streetAddress" id="street" value="<%= listing.streetAddress %>"/>
 
-            <button type="submit">Edit Listing</button>
+            <label for="city">City:</label>
+            <input type="text" name="city" id="city" value="<%= listing.city %>"/>
+
+            <label for="state">State:</label>
+            <select name="state" id="state">
+                <option value="AL" <%= listing.state === "AL" ? "selected" : "" %>>Alabama - AL</option>
+                <option value="AK" <%= listing.state === "AK" ? "selected" : "" %>>Alaska - AK</option>
+                <option value="AZ" <%= listing.state === "AZ" ? "selected" : "" %>>Arizona - AZ</option>
+                <option value="AR" <%= listing.state === "AR" ? "selected" : "" %>>Arkansas - AR</option>
+                <option value="CA" <%= listing.state === "CA" ? "selected" : "" %>>California - CA</option>
+                <option value="CO" <%= listing.state === "CO" ? "selected" : "" %>>Colorado - CO</option>
+                <option value="CT" <%= listing.state === "CT" ? "selected" : "" %>>Connecticut - CT</option>
+                <option value="DE" <%= listing.state === "DE" ? "selected" : "" %>>Delaware - DE</option>
+                <option value="FL" <%= listing.state === "FL" ? "selected" : "" %>>Florida - FL</option>
+                <option value="GA" <%= listing.state === "GA" ? "selected" : "" %>>Georgia - GA</option>
+                <option value="HI" <%= listing.state === "HI" ? "selected" : "" %>>Hawaii - HI</option>
+                <option value="ID" <%= listing.state === "ID" ? "selected" : "" %>>Idaho - ID</option>
+                <option value="IL" <%= listing.state === "IL" ? "selected" : "" %>>Illinois - IL</option>
+                <option value="IN" <%= listing.state === "IN" ? "selected" : "" %>>Indiana - IN</option>
+                <option value="IA" <%= listing.state === "IA" ? "selected" : "" %>>Iowa - IA</option>
+                <option value="KS" <%= listing.state === "KS" ? "selected" : "" %>>Kansas - KS</option>
+                <option value="KY" <%= listing.state === "KY" ? "selected" : "" %>>Kentucky - KY</option>
+                <option value="LA" <%= listing.state === "LA" ? "selected" : "" %>>Louisiana - LA</option>
+                <option value="ME" <%= listing.state === "ME" ? "selected" : "" %>>Maine - ME</option>
+                <option value="MD" <%= listing.state === "MD" ? "selected" : "" %>>Maryland - MD</option>
+                <option value="MA" <%= listing.state === "MA" ? "selected" : "" %>>Massachusetts - MA</option>
+                <option value="MI" <%= listing.state === "MI" ? "selected" : "" %>>Michigan - MI</option>
+                <option value="MN" <%= listing.state === "MN" ? "selected" : "" %>>Minnesota - MN</option>
+                <option value="MS" <%= listing.state === "MS" ? "selected" : "" %>>Mississippi - MS</option>
+                <option value="MO" <%= listing.state === "MO" ? "selected" : "" %>>Missouri - MO</option>
+                <option value="MT" <%= listing.state === "MT" ? "selected" : "" %>>Montana - MT</option>
+                <option value="NE" <%= listing.state === "NE" ? "selected" : "" %>>Nebraska - NE</option>
+                <option value="NV" <%= listing.state === "NV" ? "selected" : "" %>>Nevada - NV</option>
+                <option value="NH" <%= listing.state === "NH" ? "selected" : "" %>>New Hampshire - NH</option>
+                <option value="NJ" <%= listing.state === "NJ" ? "selected" : "" %>>New Jersey - NJ</option>
+                <option value="NM" <%= listing.state === "NM" ? "selected" : "" %>>New Mexico - NM</option>
+                <option value="NY" <%= listing.state === "NY" ? "selected" : "" %>>New York - NY</option>
+                <option value="NC" <%= listing.state === "NC" ? "selected" : "" %>>North Carolina - NC</option>
+                <option value="ND" <%= listing.state === "ND" ? "selected" : "" %>>North Dakota - ND</option>
+                <option value="OH" <%= listing.state === "OH" ? "selected" : "" %>>Ohio - OH</option>
+                <option value="OK" <%= listing.state === "OK" ? "selected" : "" %>>Oklahoma - OK</option>
+                <option value="OR" <%= listing.state === "OR" ? "selected" : "" %>>Oregon - OR</option>
+                <option value="PA" <%= listing.state === "PA" ? "selected" : "" %>>Pennsylvania - PA</option>
+                <option value="RI" <%= listing.state === "RI" ? "selected" : "" %>>Rhode Island - RI</option>
+                <option value="SC" <%= listing.state === "SC" ? "selected" : "" %>>South Carolina - SC</option>
+                <option value="SD" <%= listing.state === "SD" ? "selected" : "" %>>South Dakota - SD</option>
+                <option value="TN" <%= listing.state === "TN" ? "selected" : "" %>>Tennessee - TN</option>
+                <option value="TX" <%= listing.state === "TX" ? "selected" : "" %>>Texas - TX</option>
+                <option value="UT" <%= listing.state === "UT" ? "selected" : "" %>>Utah - UT</option>
+                <option value="VT" <%= listing.state === "VT" ? "selected" : "" %>>Vermont - VT</option>
+                <option value="VA" <%= listing.state === "VA" ? "selected" : "" %>>Virginia - VA</option>
+                <option value="WA" <%= listing.state === "WA" ? "selected" : "" %>>Washington - WA</option>
+                <option value="WV" <%= listing.state === "WV" ? "selected" : "" %>>West Virginia - WV</option>
+                <option value="WI" <%= listing.state === "WI" ? "selected" : "" %>>Wisconsin - WI</option>
+                <option value="WY" <%= listing.state === "WY" ? "selected" : "" %>>Wyoming - WY</option>
+            </select>
+
+
+            <label for="schedule">Event Schedule:</label>
+            <input type="schedule" name="schedule" id="schedule" value="<%= listing.schedule %>"/>
+
+            <label for="contactInfo">Contact Information:</label>
+            <input type="contactInfo" name="contactInfo" id="contactInfo" value="<%= listing.contactInfo %>"/>
+
+            <button type="submit">Update</button>
         </form>
     </body>
 </html>

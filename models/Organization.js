@@ -13,20 +13,35 @@ const organizationSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",    
     },
-    cause: {
-        type: String,
-        enum: ["A", "B", "C", "D"],  //Update fields later
-        required: true,
-    },
     story: {
         type: String,
+        required: true,
+    },
+    cause: {
+        type: String,
+        enum: [
+            "Human Rights",
+            "Community Support",
+            "Environment",
+            "Animals",
+            "Health & Wellness",
+            "Social Justice & Equality",
+            "Arts & Culture",
+            "Disaster & Emergency Relief",
+            "Education",
+            "Technology & Innovation"
+        ],
         required: true,
     },
     headquarters: {
         type: String,
         required: true,
     },
-    contactInfo: {
+    email: {
+        type: String,
+        required: true,
+    },
+    phone: {
         type: String,
         required: true,
     },

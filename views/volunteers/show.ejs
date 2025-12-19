@@ -12,14 +12,15 @@
         <h1>My Volunteer Profile</h1>
         <h3><%= volunteer.title %></h3>
         <p>Name: <%= volunteer.firstName %> <%= volunteer.lastName %></p>
+        <p>Bio: <%= volunteer.bio %></p>
         <p>Cause: <%= volunteer.cause %></p>
         <p>Skills: <%= volunteer.skills %></p>
-        <p>Volunteering Model: <%= volunteer.model %></p>
+        <p>Volunteering Model: <%= volunteer.modelVol %></p>
         <p>Cause: <%= volunteer.cause %></p>
         <p>Availability: <%= volunteer.availability %></p>
-        <p>Location: <%= volunteer.location %></p>
-        <p>Contact Information: <%= volunteer.contactInfo %></p>
-        <p>Bio: <%= volunteer.bio %></p>
+        <p>Location: <%= volunteer.city %>, <%= volunteer.state %></p>
+        <p>Email Address: <%= volunteer.email %></p>
+        <p>Phone Number: <%= volunteer.phone %></p>
         <p>Additional Comments: <%= volunteer.comments %></p>
 
         <h3>My Favorites</h2>
@@ -27,8 +28,7 @@
         <ul>
             <% myFavoriteListings.forEach((listing) => { %>
             <li>
-                A listing for the <%= listing.event %> owned by <%=
-                listing.owner.orgName %>.
+                A listing for the <%= listing.event %> event owned by <%=listing.owner.orgName %>.
                 <a href="/listings/<%= listing._id %>">View more details.</a>
             </li>
             <% }) %>

@@ -17,7 +17,8 @@ router.get('/', async (req, res) => {
         if (volunteer) {
             matchingListings = await Listing.find({
                 cause: volunteer.cause,
-                city: volunteer.location
+                modelVol: volunteer.modelVol,
+                state: volunteer.state
             }).populate('owner');
         }
 
@@ -28,7 +29,8 @@ router.get('/', async (req, res) => {
             for (let listing of listings) {
                 const volunteers = await Volunteer.find({
                     cause: listing.cause,
-                    location: listing.city
+                    modelVol: listing.modelVol,
+                    state: listing.state
                 });
                 orgMatches.push({ listing, volunteers });
             }

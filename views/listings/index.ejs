@@ -8,6 +8,9 @@
     <body>
         <%- include('../partials/_navbar.ejs') %>
         <h1>Here's all the Listings</h1>
+        <% if(listings.length === 0) { %>
+            <p> No listings available. </p>
+        <% } %>
         <ul>
             <% listings.forEach((listing) => { %>
             <li>

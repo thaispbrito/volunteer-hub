@@ -1,5 +1,5 @@
-const express = require('express')
-const router = express.Router()
+const express = require('express');
+const router = express.Router();
 
 const Volunteer = require('../models/Volunteer');
 const Listing = require('../models/Listing');
@@ -9,7 +9,6 @@ const Listing = require('../models/Listing');
 router.get('/profile', async (req, res) => {
     try {
         const user = req.session.user;
-        // if (!user) return res.redirect("/auth/sign-in")
 
         const volunteer = await Volunteer.findOne({userId: user._id});
         if (!volunteer) {
@@ -19,7 +18,7 @@ router.get('/profile', async (req, res) => {
         // Listings favorited by this volunteer
         const myFavoriteListings = await Listing.find({
             favoritedByVolunteers: volunteer._id,
-        }).populate('owner')
+        }).populate('owner');
 
         res.render('volunteers/show.ejs', { 
             volunteer,
@@ -27,10 +26,10 @@ router.get('/profile', async (req, res) => {
         }); 
 
     } catch (err) {
-        console.log(err)
-        res.redirect('/')
+        console.log(err);
+        res.redirect('/');
     }
-})
+});
 
 // GET /volunteer/new
 // Show form to create a volunteer profile
@@ -41,27 +40,26 @@ router.get('/new', (req, res) => {
         console.log(err);
         res.redirect('/');
     }
-})
+});
 
 // POST /volunteer
 // Create a volunteer profile
 router.post('/', async (req, res) => {
     try {
         req.body.userId = req.session.user._id
-        await Volunteer.create(req.body)
-        res.redirect('/volunteer/profile')
+        await Volunteer.create(req.body);
+        res.redirect('/volunteer/profile');
     } catch (err) {
-        console.log(err)
-        res.redirect('/')
+        console.log(err);
+        res.redirect('/');
     }
-})
+});
 
 // GET /volunteer/edit
 // Show form to edit a volunteer profile
 router.get('/edit', async (req, res) => {
     try {
         const user = req.session.user;
-        // if (!user) return res.redirect("/auth/sign-in")
 
         const volunteer = await Volunteer.findOne({userId: user._id});
         res.render('volunteers/edit.ejs', {
@@ -69,7 +67,7 @@ router.get('/edit', async (req, res) => {
         });
     } catch (err) {
         console.log(err);
-        res.redirect('/')
+        res.redirect('/');
     }  
 });
 
@@ -78,7 +76,6 @@ router.get('/edit', async (req, res) => {
 router.put('/', async (req, res) => {
     try {
         const user = req.session.user;
-        if (!user) return res.redirect("/auth/sign-in")
 
         const volunteer = await Volunteer.findOne({userId: user._id});
         if (!volunteer) {
@@ -110,9 +107,9 @@ router.delete('/', async (req, res) => {
         res.redirect('/');
 
     } catch (err) {
-        console.error(err)
-        res.redirect('/')
+        console.error(err);
+        res.redirect('/');
     }
-})
+});
 
 module.exports = router;
