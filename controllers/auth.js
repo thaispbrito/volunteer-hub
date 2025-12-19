@@ -38,7 +38,6 @@ router.post("/sign-up", async (req, res) => {
     req.session.save(() => {
         res.redirect("/");
     });
-
 });
 
 // GET SIGN IN TEMPLATE
