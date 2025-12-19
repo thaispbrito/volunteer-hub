@@ -66,10 +66,10 @@ In addition to matching, volunteers can like and comment on listings they are in
 
 ## 4. External Resources
 
-* Mongoose Documentation
-* MDN Documentation
-* W3Schools
-
+* [Mongoose Documentation](https://mongoosejs.com/docs/)
+* [MDN Documentation](https://developer.mozilla.org/en-US/)
+* [W3Schools](https://www.w3schools.com/)
+* [Unsplash](https://unsplash.com/)
 
 ## 5. Next Steps
 
