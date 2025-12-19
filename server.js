@@ -62,17 +62,6 @@ app.use(
 // Add our custom middleware right after the session middleware
 app.use(passUserToView);
 
-
-// ROUTES
-
-// app.get("/", (req, res) => {
-//     res.render("index.ejs");
-// });
-
-// app.get("/vip-lounge", isSignedIn, (req, res) => {
-//     res.send(`Welcome to the party ${req.session.user.username}.`);
-// });
-
 app.use("/auth", authController);
 app.use("/", usersController);  // for handling homepage
 app.use("/volunteer", isSignedIn, volunteersController);  // singular URL for one-to-one relationship
