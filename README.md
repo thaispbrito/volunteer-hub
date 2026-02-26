@@ -49,7 +49,7 @@ In addition to matching, volunteers can like and comment on listings they are in
 | <h3 align="center">Add Volunteer Profile</h3>       |  <img src="public/images/form_page.png" width="600">   |
 | <h3 align="center">View All Listings </h3>    |  <img src="public/images/listings_page.png" width="600">   |
 | <h3 align="center">View Matching Dashboard </h3>   | <img src="public/images/dashboard.png" width="600"> |
-| <h3 align="center">Comment & Favorites Section </h3>   | <img src="public/images/comments_section.png" width="600"> |
+| <h3 align="center">Comment & Favorites Section </h3>   | <img src="public/images/comment_section.png" width="600"> |
 
 
 ## :desktop_computer: Technologies Used
