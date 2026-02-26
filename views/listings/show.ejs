@@ -27,17 +27,17 @@
 
             <h2>Owner</h2>
             <% if (listing.owner.owner.equals(currentUserId)) { %>
-            <p>You own this!</p>
+                <p>You own this!</p>
 
-            <div class="profile-actions">
-                <a href="/listings/<%= listing._id %>/edit" class="action-button">Edit this listing</a>
-                <form action="/listings/<%= listing._id %>?_method=DELETE" method="POST">
-                    <button type="submit" class="action-button">Delete</button>
-                </form>
-            </div>
+                <div class="profile-actions">
+                    <a href="/listings/<%= listing._id %>/edit" class="action-button">Edit this listing</a>
+                    <form action="/listings/<%= listing._id %>?_method=DELETE" method="POST">
+                        <button type="submit" class="action-button">Delete</button>
+                    </form>
+                </div>
 
             <% } else { %>
-            <p><%= listing.owner.orgName %> organization</p>
+                <p><%= listing.owner.orgName %> organization</p>
             <% } %>
 
             <h2>Likes</h2>
@@ -47,11 +47,11 @@
             <% if (volunteer) { %>
                 <% if (volunteerHasFavorited) { %>
                     <form action="/listings/<%= listing._id %>/favorite?_method=DELETE" method="POST">
-                    <button type="submit">Dislike</button>
+                        <button type="submit">Dislike</button>
                     </form>
                 <% } else { %>
                     <form action="/listings/<%= listing._id %>/favorite" method="POST">
-                    <button type="submit">Like</button>
+                        <button type="submit">Like</button>
                     </form>
                 <% } %>
             <% } %>
@@ -78,7 +78,8 @@
                             <form method="POST"
                                 action="/listings/<%= listing._id %>/comments/<%= comment._id %>?_method=DELETE"
                                 style="display:inline;">
-                            <button class="delete-button">Delete</button>
+                                
+                                <button class="delete-button">Delete</button>
                             </form>
 
                             <!-- Edit button (only for comment owner) -->

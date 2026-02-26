@@ -6,7 +6,8 @@ const Listing = require('../models/Listing');
 const Volunteer = require('../models/Volunteer');
 const Organization = require('../models/Organization');
 
-
+// POST /listings/:listingId/comments
+// Create new comment
 router.post('/', async (req, res) => {
     try {
         const user = req.session.user;
@@ -43,7 +44,6 @@ router.post('/', async (req, res) => {
         res.redirect('/');
     }
 });
-
 
 // GET /listings/:listingId/comments/:commentId/edit
 // Edit comment form

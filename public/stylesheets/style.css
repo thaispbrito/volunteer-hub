@@ -17,9 +17,47 @@ body {
     justify-content: space-between;
 }
 
-.logo-container>h1 {
+.logo-container {
+    display: flex;
+    flex-direction: row;
+    width: 50%;
+    margin: 18px 0 0;
+}
+
+.logo-container a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+    padding: 15px; 
+    border-radius: 10px; 
+    transition: box-shadow 0.3s, transform 0.2s; 
+}
+
+.logo-container a:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25); 
+    background-color: rgba(255, 255, 255, 0.05); 
+}
+
+.logo-container a h1 {
+    color: black;
+    font-size: 1.4em;
+    margin: 0;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+/* .logo-container>h1 {
     margin: 0;
     font-size: 1.4em;
+} */
+
+.sphere-icon {
+    width: 1.4em;
+    height: 1.4em;
+    background-repeat: no-repeat;
+    background-size: contain;
+    margin-right: 5px
 }
 
 .landing-image {
@@ -32,7 +70,7 @@ body {
 
 .auth-links,
 .nav-links {
-    margin: 25px 20px;
+    margin: 25px 30px;
 }
 
 .auth-links>a {
@@ -68,9 +106,9 @@ body {
     color: black;
 }
 
-.nav-links>a:hover {
+.nav-links>a:hover{
     color: #bfa78a;
-    text-decoration: underline;
+    text-decoration: none;
 }
 
 .signup-page,
@@ -93,10 +131,15 @@ body {
 
 .signup-form-container-2,
 .signin-form-container-2 {
-    padding: 10px 30px 20px;
+    padding: 50px 30px 50px;
     border: 1px solid gray;
+    max-width: 350px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
-
+ 
 .signup-form-container-2>h1,
 .signin-form-container-2>h1 {
     font-weight: normal;
@@ -108,6 +151,11 @@ body {
 .signin-form-container-2>form {
     display: flex;
     flex-direction: column;
+}
+
+.signup-form-container-2 button {
+    width: 16em;
+    align-self: flex-start;
 }
 
 label {
@@ -138,6 +186,7 @@ button:hover {
 
 .signup-img {
     background-image: url('https://images.unsplash.com/photo-1578357078586-491adf1aa5ba?q=80&w=764&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+    /* background-image: url('https://images.unsplash.com/photo-1695205962469-dcfa0514f4c4?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); */
     min-height: 110vh;
     background-size: cover;
     background-repeat: no-repeat;
@@ -160,13 +209,24 @@ button:hover {
 .index-container {
     width: 80%;
     max-width: 800px;
-    margin: 50px auto;
     text-align: center;
 }
 
-.index-container h1 {
-    color: #4b3f34;
-    margin-bottom: 20px;
+/* .index-container {
+    text-align: center;
+    margin: 0 auto; 
+    padding-top: 10px;
+    width: 80%;
+    max-width: 800px;
+} */
+
+.index-container h1{
+    color: black;
+    margin: 5px auto;
+}
+
+.index-container p {
+    padding-bottom: 10px;
 }
 
 .card-container li h4 {
@@ -198,6 +258,9 @@ button:hover {
     border-radius: 8px;
     font-weight: bold;
     transition: background-color 0.2s;
+    min-width: 210px;
+    text-align: center;
+    box-sizing: border-box;
 }
 
 .card-container a:hover {
@@ -207,19 +270,20 @@ button:hover {
 .dashboard {
     width: 80%;
     max-width: 900px;
-    margin: 50px auto;
+    margin: 30px auto;
     text-align: center;
     font-family: 'Raleway', sans-serif;
 }
 
 .dashboard h1 {
-    color: #4b3f34;
+    color: black;
+    margin: 0 auto;
     margin-bottom: 30px;
 }
 
 .dashboard h2 {
     color: #5a4e42;
-    margin-top: 40px;
+    margin-top: 60px;
     margin-bottom: 20px;
     border-bottom: 1px solid #ccc;
     padding-bottom: 5px;
@@ -233,7 +297,7 @@ button:hover {
 
 .dashboard p {
     background-color: #fff8f0;
-    padding: 12px 15px;
+    padding: 15px 15px;
     border-radius: 8px;
     margin-bottom: 10px;
     color: #3e3327;
@@ -265,7 +329,7 @@ button:hover {
 .new-edit-container {
     width: 80%;
     max-width: 700px;
-    margin: 50px auto;
+    margin: 30px auto;
     padding: 20px;
     background-color: #fff8f0;
     border-radius: 15px;
@@ -515,19 +579,25 @@ a.action-button {
 .listing-card {
     background-color: #fff8f0;
     border-radius: 10px;
-    padding: 15px 20px;
+    padding: 30px 40px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-    width: 250px;
+    width: 300px;
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-bottom: 15px;
 }
 
-.listing-card h4 {
-    margin: 0 0 10px 0;
+.listing-card h3 {
+    margin: 5px 5px 15px 5px;
     font-weight: bold;
     color: #3e3327;
+}
+
+.listing-card p {
+    margin: 0 0 10px 0;
+    color: #3e3327;
+    font-size: 14px;
 }
 
 .listing-card .view-details {

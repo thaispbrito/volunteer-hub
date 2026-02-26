@@ -18,7 +18,8 @@
             <div class="index-container">
                 <% if (user) { %>
                     <h1>Welcome to ServeSphere, <%= user.username %>!</h1>
-                    <p> A hub for connecting volunteers and organizations to create positive change.</p>
+                    <h2>Where service meets opportunity 🤝</h2>
+                    <p><em>Ready to make a difference? Create or access your profile below!</em></p>
 
                     <div class="card-container">
                         <!-- If a volunteer profile exists, redirect to the profile -->
@@ -39,8 +40,8 @@
                     </div>
 
                 <% } else { %>
-                    <h1>Welcome to ServeSphere Hub!</h1>
-                    <p> Connecting volunteers and organizations to create positive change</p>
+                    <h1>Welcome to ServeSphere!</h1>
+                    <p><em>Connecting volunteers and organizations to create positive change</em></p>
                 <% } %>
             </div>
     </body>

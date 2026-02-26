@@ -29,10 +29,10 @@
             <p>You liked <%=myFavoriteListings.length%> listings</p>
             <ul>
                 <% myFavoriteListings.forEach((listing) => { %>
-                <li>
-                    <%= listing.event %> event owned by <%=listing.owner.orgName %>.
-                    <a href="/listings/<%= listing._id %>" class="view-details">View more details.</a>
-                </li>
+                    <li>
+                        <%= listing.event %> event owned by <%=listing.owner.orgName %>.
+                        <a href="/listings/<%= listing._id %>" class="view-details">View more details.</a>
+                    </li>
                 <% }) %>
             </ul>
 

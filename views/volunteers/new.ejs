@@ -10,7 +10,7 @@
         <%- include('../partials/_navbar.ejs') %>
 
         <div class="new-edit-container">
-            <h1>Create a New Volunteer Profile</h1>
+            <h1>New Volunteer Profile</h1>
             <form action="/volunteer" method="POST">
                 <label for="title">Title:</label>
                 <input type="text" name="title" id="title" required/>
@@ -26,7 +26,7 @@
 
                 <label for="cause">Cause:</label>
                 <select name="cause" id="cause" required>
-                    <option value="" selected disabled hidden>Select an option</option>
+                    <option value="" selected disabled hidden></option>
                     <option value="Human Rights">Human Rights</option>
                     <option value="Community Support">Community Support</option>
                     <option value="Environment">Environment</option>
@@ -44,7 +44,7 @@
 
                 <label for="modelVol">Volunteering Model:</label>
                 <select name="modelVol" id="modelVol" required>
-                    <option value="" selected disabled hidden>Select an option</option>
+                    <option value="" selected disabled hidden></option>
                     <option value="In-Person">In-Person</option>
                     <option value="Remote">Remote</option>
                 </select>     
@@ -57,7 +57,7 @@
 
                 <label for="state">State:</label>
                 <select name="state" id="state" required>
-                    <option value="" selected disabled hidden>Select an option</option>
+                    <option value="" selected disabled hidden></option>
                     <option value="AL">Alabama - AL</option>
                     <option value="AK">Alaska - AK</option>
                     <option value="AZ">Arizona - AZ</option>

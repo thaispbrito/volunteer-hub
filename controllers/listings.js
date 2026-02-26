@@ -115,7 +115,6 @@ router.delete('/:listingId', async (req, res) => {
     }
 });
 
-
 // POST /listings/:listingId/favorite
 router.post('/:listingId/favorite', async (req, res) => {
     try {

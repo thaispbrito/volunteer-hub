@@ -5,7 +5,6 @@ const Volunteer = require('../models/Volunteer');
 const Listing = require('../models/Listing');
 const Organization = require('../models/Organization');
 
-
 // GET /
 // Display matching dashboard 
 router.get('/', async (req, res) => {

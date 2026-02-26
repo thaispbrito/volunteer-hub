@@ -35,10 +35,10 @@
             </p>
             <ul>
                 <% myListings.forEach((listing) => { %>
-                <li>
-                    A listing for the <%= listing.event %> event
-                    <a href="/listings/<%= listing._id %>" class="view-details">View more details</a>
-                </li>
+                    <li>
+                        A listing for the <%= listing.event %> event
+                        <a href="/listings/<%= listing._id %>" class="view-details">View more details</a>
+                    </li>
                 <% }) %>
             </ul>
 

@@ -10,7 +10,7 @@
         <%- include('../partials/_navbar.ejs') %>
 
         <div class="new-edit-container">
-        <h1>Add New Organization</h1>
+        <h1>New Organization</h1>
             <form action="/organizations" method="POST">
                 <label for="slogan">Slogan:</label>
                 <input type="text" name="slogan" id="slogan" required/>
@@ -23,7 +23,7 @@
 
                 <label for="cause">Cause:</label>
                 <select name="cause" id="cause" required>
-                    <option value="" selected disabled hidden>Select an option</option>
+                    <option value="" selected disabled hidden></option>
                     <option value="Human Rights">Human Rights</option>
                     <option value="Community Support">Community Support</option>
                     <option value="Environment">Environment</option>

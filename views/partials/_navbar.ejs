@@ -2,10 +2,12 @@
     <% if (user) { %>
         <div class="landing-header">
             <div class="logo-container">
-                <h1>ServeSphere</h1>
+                <a href="/">
+                    <img src="/images/logo.png" alt="ServeSphere Logo" class="sphere-icon">
+                    <h1>ServeSphere</h1>
+                </a>               
             </div>
             <div class="nav-links">
-                <a href="/">Home</a>
                 <a href="/listings">All Listings</a>
                 <a href="/matches">Matching Dashboard</a>
                 <a href="/auth/sign-out">Sign Out</a>
@@ -14,7 +16,10 @@
     <% } else { %>
         <div class="landing-header">
             <div class="logo-container">
-                <h1>ServeSphere</h1>
+                <a href="/">
+                    <img src="/images/logo.png" alt="ServeSphere Logo" class="sphere-icon">
+                    <h1>ServeSphere</h1>
+                </a>  
             </div>
             <div class="auth-links">
                 <a href="/auth/sign-up">Sign Up</a>
