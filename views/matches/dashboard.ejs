@@ -10,29 +10,27 @@
         <%- include('../partials/_navbar.ejs') %>
 
         <div class="dashboard">
-            <h1>Discover Your Matches</h1>
+            <h1>Discover Your Matches 🎯</h1>
 
-            <h2>Your Volunteer Matches</h2>
+            <h2>Listings Matching You</h2>
             <% if (volunteer && matchingListings && matchingListings.length > 0) { %>
                 <% matchingListings.forEach(listing => { %>
-                    <p><a href="/listings/<%= listing._id %>"><%= listing.event %></a> from <%= listing.owner.orgName %></p>
+                    <p><%= listing.event %> from <%= listing.owner.orgName %><a href="/listings/<%= listing._id %>"> + Details</a></p>
                 <% }) %>
             <% } else if (volunteer) { %>
                 <p>No matching listings found.</p>
             <% } else if (!volunteer) { %>
                 <p>Create a profile as a volunteer first.</p>
-                <a href="/volunteer/new">Click Here</a>
+                <a href="/volunteer/new" class="action-button">Click Here</a>
             <% } %>
 
-            <h2>Your Organization Matches</h2>
+            <h2>Volunteers Matching Your Listings</h2>
             <% if (orgMatches && orgMatches.length > 0) { %>
                 <% orgMatches.forEach(match => { %>
                     <h3><%= match.listing.event %> in <%= match.listing.city %></h3>
                     <% if (match.volunteers.length > 0) { %>
                         <% match.volunteers.forEach(vol => { %>
-                            <p><%= vol.firstName %> <%= vol.lastName %>
-                            <p>Phone Number: <%= vol.phone %></p>
-                            <p>Email Address: <%= vol.email %></p>
+                            <p><strong>Volunteer:</strong> <%= vol.firstName %> <%= vol.lastName %> | <strong>Phone Number:</strong> <%= vol.phone %> | <strong>Email:</strong> <%= vol.email %></p>
                         <% }) %>
                     <% } else { %>
                         <p>No matching volunteers for this listing.</p>
@@ -42,7 +40,7 @@
                 <p>No matching volunteers found for your organization(s) listings.</p>
             <% } else if (organizations.length === 0){ %>
                 <p>Add an organization first.</p>
-                <a href="/organizations/new">Click Here</a>
+                <a href="/organizations/new" class="action-button">Click Here</a>
             <% } %>
         </div>
     </body>

@@ -8,7 +8,6 @@
     </head>
     <body>
         <%- include('../partials/_navbar.ejs') %>
-        <a href="/organizations" class="back-button">Back to My Organizations</a>
 
         <div class="show-container">
             <h1><%= organization.orgName %></h1>
@@ -22,12 +21,14 @@
             <p><span class="title">Phone Number</span>: <span class="value"><%= organization.phone %></span></p>
        
             <div class="profile-actions">
-                <a href="/organizations/<%= organization._id %>/edit" class="action-button">Edit Profile</a>
+                <a href="/organizations/<%= organization._id %>/edit" class="action-button">Edit</a>
                 <form action="/organizations/<%= organization._id %>?_method=DELETE" method="POST">
-                    <button type="submit" class="action-button">Delete Profile</button>
+                    <button type="submit" class="action-button">Delete</button>
                 </form>
             </div>
 
+            <br />
+            <br />
             <h2>Listings</h2>
             <p>
                 You own <%= myListings.length %> <%= myListings.length === 1 ?
@@ -36,13 +37,13 @@
             <ul>
                 <% myListings.forEach((listing) => { %>
                     <li>
-                        A listing for the <%= listing.event %> event
-                        <a href="/listings/<%= listing._id %>" class="view-details">View more details</a>
+                        A listing for the <%= listing.event %> event <br />
+                        <a href="/listings/<%= listing._id %>" class="action-button"> + Details</a>
                     </li>
                 <% }) %>
             </ul>
 
-            <a href="/listings/new/<%= organization._id %>">Add a New Listing</a>
+            <a href="/listings/new/<%= organization._id %>" class="action-button"> Add Listing</a>
         </div>
     </body>
 </html>

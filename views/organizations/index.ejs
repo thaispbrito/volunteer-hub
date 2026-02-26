@@ -12,24 +12,31 @@
 		<%- include('../partials/_navbar.ejs') %>
 
 		<div class="index-container">
-			<h1>Here's all my organizations:</h1>
+			<div class="org-heading">
+				<h1>My organizations 🏛️</h1>
+				<a href="/organizations/new" class="org-link">+ New Organization</a>
+			</div>
 
-			<% if (organizations.length > 0) {%>
+			<% 
+				const ownedOrganizations = organizations.filter(org => 
+					org.owner._id.equals(currentUserId)
+				); 
+			%>
+	
+			<% if (ownedOrganizations.length > 0) {%>
 				<div class="card-container">
-					<% organizations.forEach((organization)=> { %>
-						<% if (organization.owner._id.equals(currentUserId)) { %>	
-								<div class="organization-card">
-									<h3><%= organization.orgName %></h3>
-									<a href="/organizations/<%= organization._id %>" class="view-details">View more details</a>
-								</div>
-						<% } %>
+					<% ownedOrganizations.forEach((organization)=> { %>
+						<div class="listing-org-card">
+							<h3><%= organization.orgName %></h3>
+							<p><%= organization.cause%> Cause</p>
+							<a href="/organizations/<%= organization._id %>" class="view-details">View more details</a>
+						</div>
 					<% }) %>
 				</div>
 			<% } else { %>
-				<p> No organizations found. </p>
+				<p class="card-message"> No organizations found. Go ahead and create one! </p>
 			<% } %>
 
-			<a href="/organizations/new" class="action-button">Add a New Organization</a>
 		</div>
 	</body>
 

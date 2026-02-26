@@ -45,7 +45,10 @@
                 <label for="phone">Phone Number:</label>
                 <input type="phone" name="phone" id="phone" value="<%=organization.phone%>" />
 
-                <button type="submit">Update</button>
+                <div class="profile-actions">
+                    <button type="submit" class="action-button">Update</button>
+                    <a href="/organizations/<%= organization._id %>" class="action-button">Cancel</a>
+                </div>
             </form>
         </div>
     </body>

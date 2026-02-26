@@ -11,13 +11,14 @@
 
         <div class="index-container">
             <h1>Explore Listings 🔍</h1>
+            <br />
 
             <% if(listings.length === 0) { %>
                 <p>No listings available.</p>
             <% } else { %>
                 <div class="card-container">
                     <% listings.forEach((listing) => { %>
-                        <div class="listing-card">
+                        <div class="listing-org-card">
                             <h3><%= listing.event %></h3>
                             <p>Owned by <%= listing.owner.orgName %></p>
                             <a href="/listings/<%= listing._id %>" class="view-details">View more details</a>

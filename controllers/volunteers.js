@@ -4,6 +4,23 @@ const router = express.Router();
 const Volunteer = require('../models/Volunteer');
 const Listing = require('../models/Listing');
 
+// GET /volunteer
+// Redirect to profile if exists, otherwise to new profile form
+router.get('/', async (req, res) => {
+    try {
+        const user = req.session.user;
+        const volunteer = await Volunteer.findOne({ userId: user._id });
+        if (volunteer) {
+            return res.redirect('/volunteer/profile');
+        } else {
+            return res.redirect('/volunteer/new');
+        }
+    } catch (err) {
+        console.log(err);
+        res.redirect('/');
+    }
+});
+
 // GET /volunteer/profile
 // View the logged-in user's volunteer profile
 router.get('/profile', async (req, res) => {
@@ -33,6 +50,7 @@ router.get('/profile', async (req, res) => {
 
 // GET /volunteer/new
 // Show form to create a volunteer profile
+
 router.get('/new', (req, res) => {
     try {
         res.render('volunteers/new.ejs');
@@ -41,6 +59,20 @@ router.get('/new', (req, res) => {
         res.redirect('/');
     }
 });
+
+// router.get('/new', async (req, res) => {
+//     try {
+//         const user = req.session.user;
+//         let volunteer = null;
+//         if (user) {
+//             volunteer = await Volunteer.findOne({ userId: user._id });
+//         }
+//         res.render('volunteers/new.ejs', { volunteer });
+//     } catch (err) {
+//         console.log(err);
+//         res.redirect('/');
+//     }
+// });
 
 // POST /volunteer
 // Create a volunteer profile

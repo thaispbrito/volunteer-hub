@@ -117,7 +117,10 @@
                 <label for="comments">Additional Comments:</label>
                 <textarea name="comments" id="comments"><%= volunteer.comments %></textarea>
 
-                <button type="submit">Update Profile</button>
+                <div class="profile-actions">
+                    <button type="submit" class="action-button">Update</button>
+                    <a href="/volunteer/profile" class="action-button">Cancel</a>
+                </div>
             </form>
         </div>
     </body>
