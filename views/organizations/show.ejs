@@ -12,7 +12,7 @@
         <div class="show-container">
             <h1><%= organization.orgName %></h1>
 
-            <h2><%= organization.slogan %></h2>
+            <h3><%= organization.slogan %></h3>
 
             <p><span class="title">Our Story</span>: <span class="value"><%= organization.story %></span></p>
             <p><span class="title">Cause</span>: <span class="value"><%= organization.cause %></span></p>
@@ -37,7 +37,7 @@
             <ul>
                 <% myListings.forEach((listing) => { %>
                     <li>
-                        A listing for the <%= listing.event %> event <br />
+                        <strong>Event:</strong> <%= listing.event %><br />
                         <a href="/listings/<%= listing._id %>" class="action-button"> + Details</a>
                     </li>
                 <% }) %>

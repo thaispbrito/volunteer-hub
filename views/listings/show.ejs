@@ -37,7 +37,7 @@
             <% } else { %>
                 <p><%= listing.owner.orgName %> organization</p>
             <% } %>
-
+            <br />    
             <h2>Likes</h2>
 
             <p><%= listing.favoritedByVolunteers.length %> volunteers liked this listing</p>
@@ -104,9 +104,9 @@
 
             <!-- Add new comment form -->
             <% if (volunteer || (organization && listing.owner.owner.equals(currentUserId))) { %>
-                <h3>Add a Comment</h3>
+                <!-- <h3>Add a Comment</h3> -->
                 <form action="/listings/<%= listing._id %>/comments" method="POST">
-                    <textarea name="content" rows="3" required></textarea>
+                    <textarea name="content" rows="3" required placeholder="Add a comment..."></textarea>
                     <br>
                     <button type="submit" class="action-button">Submit</button>
                 </form>
