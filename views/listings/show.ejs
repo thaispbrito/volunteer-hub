@@ -9,140 +9,158 @@
     <body>
         <%- include('../partials/_navbar.ejs') %>
 
-        <a href="/organizations/<%= organization._id %>" class="back-button">← Back to <%= organization.orgName %></a>
-        <div class="show-container">
+        <% if (!listing.owner) { %>
+            <div class="show-container">
+                <h1>Listing Not Available</h1>
+                <p>This listing no longer has an associated organization and cannot be displayed.</p>
+                <a href="/listings" class="action-button">Back to Listings</a>
+            </div>
+        <% } else { %>
 
-            <h1><%= listing.event %></h1>
-            
-            <p><span class="title">Description:</span> <span class="value"><%= listing.description %></span></p>
-            <p><span class="title">Cause:</span> <span class="value"><%= listing.cause %></span></p>
-            <p><span class="title">Required Skills:</span> <span class="value"><%= listing.skills %></span></p>
-            <p><span class="title">Volunteering Model:</span> <span class="value"><%= listing.modelVol %></span></p>
-            <p><span class="title">Street Address:</span> <span class="value"><%= listing.streetAddress %></span></p>  
-            <p><span class="title">City & State:</span> <span class="value"><%= listing.city %>, <%= listing.state %></span></p>
-            <p><span class="title">Event Schedule:</span> <span class="value"><%= listing.schedule %></span></p>
-            <p><span class="title">Contact Information:</span> <span class="value"><%= listing.contactInfo %></span></p>
+            <a href="/organizations/<%= organization._id %>" class="back-button">← Back to <%= organization.orgName %></a>
+            <div class="show-container">
 
-            <h2>Owner</h2>
-            <% if (listing.owner.owner.equals(currentUserId)) { %>
-                <p>You own this!</p>
+                <h1><%= listing.event %></h1>
+                
+                <p><span class="title">Description:</span> <span class="value"><%= listing.description %></span></p>
+                <p><span class="title">Cause:</span> <span class="value"><%= listing.cause %></span></p>
+                <p><span class="title">Required Skills:</span> <span class="value"><%= listing.skills %></span></p>
+                <p><span class="title">Volunteering Model:</span> <span class="value"><%= listing.modelVol %></span></p>
+                <p><span class="title">Street Address:</span> <span class="value"><%= listing.streetAddress %></span></p>  
+                <p><span class="title">City & State:</span> <span class="value"><%= listing.city %>, <%= listing.state %></span></p>
+                <p><span class="title">Event Schedule:</span> <span class="value"><%= listing.schedule %></span></p>
+                <p><span class="title">Contact Information:</span> <span class="value"><%= listing.contactInfo %></span></p>
 
-                <div class="profile-actions">
-                    <a href="/listings/<%= listing._id %>/edit" class="action-button">Edit</a>
-                    <form action="/listings/<%= listing._id %>?_method=DELETE" method="POST">
-                        <button type="submit" class="action-button">Delete</button>
-                    </form>
-                </div>
+                <h2>Owner</h2>
+                <% if (listing.owner.owner.equals(currentUserId)) { %>
+                    <p>You own this!</p>
 
-            <% } else { %>
-                <p><%= listing.owner.orgName %> organization</p>
-            <% } %>
-            <br />    
-            <h2>Likes</h2>
+                    <div class="profile-actions">
+                        <a href="/listings/<%= listing._id %>/edit" class="action-button">Edit</a>
+                        <form action="/listings/<%= listing._id %>?_method=DELETE" method="POST">
+                            <button type="submit" class="action-button">Delete</button>
+                        </form>
+                    </div>
 
-            <p><%= listing.favoritedByVolunteers.length %> volunteers liked this listing</p>
-
-            <% if (volunteer) { %>
-                <% if (volunteerHasFavorited) { %>
-                    <form action="/listings/<%= listing._id %>/favorite?_method=DELETE" method="POST">
-                        <button type="submit">Dislike</button>
-                    </form>
                 <% } else { %>
-                    <form action="/listings/<%= listing._id %>/favorite" method="POST">
-                        <button type="submit">Like</button>
-                    </form>
+                    <p><%= listing.owner.orgName %> organization</p>
                 <% } %>
-            <% } %>
+                <br />    
+                <h2>Likes</h2>
 
-            <h2>Comments</h2>
+                <p><%= listing.favoritedByVolunteers.length %> volunteers liked this listing</p>
 
-            <% if (comments && comments.length > 0) { %>
-                <% comments.forEach(comment => { %>
-                    <div class="comment" data-comment-id="<%= comment._id %>">
-                        <strong>
-                            <% if (comment.volunteer) { %>
-                                <%= comment.volunteer.firstName %> <%= comment.volunteer.lastName %>
-                            <% } else if (comment.organization) { %>
-                                <%= comment.organization.orgName%>
-                            <% } %>
-                        </strong>:
+                <% if (volunteer) { %>
+                    <% if (volunteerHasFavorited) { %>
+                        <form action="/listings/<%= listing._id %>/favorite?_method=DELETE" method="POST">
+                            <button type="submit" class="action-button">Dislike</button>
+                        </form>
+                    <% } else { %>
+                        <form action="/listings/<%= listing._id %>/favorite" method="POST">
+                            <button type="submit" class="action-button">Like</button>
+                        </form>
+                    <% } %>
+                <% } %>
 
-                        <!-- Display text -->
-                        <span class="comment-text"><%= comment.content %></span>
+                <h2>Comments</h2>
 
-                        <% if (comment.user.equals(currentUserId) || listing.owner.owner.equals(currentUserId)) { %>
+                <% if (comments && comments.length > 0) { %>
+                    <% comments.forEach(comment => { %>
+                        <div class="comment-card" data-comment-id="<%= comment._id %>">
                             
-                            <!-- Delete button -->
-                            <form method="POST"
-                                action="/listings/<%= listing._id %>/comments/<%= comment._id %>?_method=DELETE"
-                                style="display:inline;">
-                                
-                                <br />
-                                <button class="delete-comment-btn">Delete</button>
-                            </form>
+                            <% if (comment.volunteer) { %>
+                                <span>
+                                    <strong><%= comment.volunteer.firstName %> <%= comment.volunteer.lastName %>: </strong>
+                                    <span class="comment-text"><%= comment.content %></span>
+                                </span>
+                            <% } else if (comment.organization) { %>
+                                <span>
+                                    <strong><%= comment.organization.orgName %>: </strong>
+                                    <span class="comment-text"><%= comment.content %></span>
+                                </span>
+                            <% } %>
 
-                            <!-- Edit button (only for comment owner) -->
-                            <% if (comment.user.equals(currentUserId)) { %>
-                                <button class="edit-comment-btn">Edit</button>
+                            <% if (comment.user.equals(currentUserId) || listing.owner.owner.equals(currentUserId)) { %>
+                                
+                                <div class="comment-actions">
+
+                                    <!-- Edit button (only for comment owner) -->
+                                    <% if (comment.user.equals(currentUserId)) { %>
+                                        <button class="edit-comment-btn action-button">Edit</button>      
+                                    <% } %> 
+
+                                    <!-- Delete button -->
+                                    <form method="POST"
+                                        action="/listings/<%= listing._id %>/comments/<%= comment._id %>?_method=DELETE"
+                                        style="display:inline;"> 
+                    
+                                        <button class="delete-comment-btn action-button">Delete</button>
+                                    </form>
+
+                                </div>    
 
                                 <!-- Hidden edit form -->
-                                <form class="edit-form" 
-                                        action="/listings/<%= listing._id %>/comments/<%= comment._id %>?_method=PUT" 
-                                        method="POST" 
-                                        style="display:none;">
-                                    <textarea name="content" rows="2" required><%= comment.content %></textarea>
-                                    <br>
-                                    <button type="submit" class="action-button">Update</button>
-                                </form>
+                                <% if (comment.user.equals(currentUserId)) { %>     
+                                    <form class="edit-form" 
+                                            action="/listings/<%= listing._id %>/comments/<%= comment._id %>?_method=PUT" 
+                                            method="POST" 
+                                            style="display:none;">
+                                        <textarea name="content" rows="2" required><%= comment.content %></textarea>
+                                        <div class="comment-actions">
+                                            <button type="submit" class="action-button">Update</button>
+                                            <button type="button" class="cancel-comment-btn action-button">Cancel</button>
+                                        </div>
+                                    </form>
+                                <% } %>   
                             <% } %>
-                        <% } %>
-                    </div>
-                <% }) %>
-            <% } else { %>
-                <p>No comments yet. </p>
-            <% } %>
+                        </div>
+                    <% }) %>
+                <% } else { %>
+                    <p>No comments yet. </p>
+                <% } %>
 
-            <!-- Add new comment form -->
-            <% if (volunteer || (organization && listing.owner.owner.equals(currentUserId))) { %>
-                <!-- <h3>Add a Comment</h3> -->
-                <form action="/listings/<%= listing._id %>/comments" method="POST">
-                    <textarea name="content" rows="3" required placeholder="Add a comment..."></textarea>
-                    <br>
-                    <button type="submit" class="action-button">Submit</button>
-                </form>
-            <% } %>
+                <br />
+                <!-- Add new comment form -->
+                <% if (volunteer || (organization && listing.owner.owner.equals(currentUserId))) { %>
+                    <!-- <h3>Add a Comment</h3> -->
+                    <form action="/listings/<%= listing._id %>/comments" method="POST">
+                        <textarea name="content" rows="3" required placeholder="Add a comment..."></textarea>
+                        <br>
+                        <button type="submit" class="action-button">Submit</button>
+                    </form>
+                <% } %>
 
-            <!-- Single script for all edit/cancel buttons -->
-            <script>
-                document.addEventListener('click', function(event) {
-                    // Edit button clicked
-                    if (event.target.matches('.edit-button')) {
-                        const commentSection = event.target.closest('.comment');
-                        commentSection.querySelector('.comment-text').style.display = 'none';
-                        commentSection.querySelector('.edit-form').style.display = 'block';
+                <!-- Single script for all edit/cancel buttons -->
+                <script>
+                    document.addEventListener('click', function(event) {
+                        // Edit button clicked
+                        if (event.target.matches('.edit-comment-btn')) {
+                            const commentSection = event.target.closest('.comment-card');
+                            commentSection.querySelector('.comment-text').style.display = 'none';
+                            commentSection.querySelector('.edit-form').style.display = 'block';
 
-                        // Hide edit and delete buttons
-                        const editButton = commentSection.querySelector('.edit-button');
-                        const deleteButton = commentSection.querySelector('.delete-button');
-                        if (editButton) editButton.style.display = 'none';
-                        if (deleteButton) deleteButton.style.display = 'none';
-                    }
+                            // Hide edit and delete buttons
+                            const editButton = commentSection.querySelector('.edit-comment-btn');
+                            const deleteButton = commentSection.querySelector('.delete-comment-btn');
+                            if (editButton) editButton.style.display = 'none';
+                            if (deleteButton) deleteButton.style.display = 'none';
+                        }
 
-                    // Cancel button clicked
-                    if (event.target.matches('.cancel-button')) {
-                        const commentSection = event.target.closest('.comment');
-                        commentSection.querySelector('.edit-form').style.display = 'none';
-                        commentSection.querySelector('.comment-text').style.display = 'inline';
+                        // Cancel button clicked
+                        if (event.target.matches('.cancel-comment-btn')) {
+                            const commentSection = event.target.closest('.comment-card');
+                            commentSection.querySelector('.edit-form').style.display = 'none';
+                            commentSection.querySelector('.comment-text').style.display = 'inline';
 
-                        // Show edit and delete buttons again
-                        const editButton = commentSection.querySelector('.edit-button');
-                        const deleteButton = commentSection.querySelector('.delete-button');
-                        if (editButton) editButton.style.display = 'inline';
-                        if (deleteButton) deleteButton.style.display = 'inline';
-                    }
-                });
-            </script>
-
-        </div>
+                            // Show edit and delete buttons again
+                            const editButton = commentSection.querySelector('.edit-comment-btn');
+                            const deleteButton = commentSection.querySelector('.delete-comment-btn');
+                            if (editButton) editButton.style.display = 'inline';
+                            if (deleteButton) deleteButton.style.display = 'inline';
+                        }
+                    });
+                </script>
+            </div>
+        <% } %>    
     </body>
 </html>

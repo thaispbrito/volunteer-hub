@@ -18,11 +18,13 @@
             <% } else { %>
                 <div class="card-container">
                     <% listings.forEach((listing) => { %>
-                        <div class="listing-org-card">
-                            <h3><%= listing.event %></h3>
-                            <p>Owned by <%= listing.owner.orgName %></p>
-                            <a href="/listings/<%= listing._id %>" class="view-details">View more details</a>
-                        </div>
+                        <% if (listing.owner) { %>
+                            <div class="listing-org-card">
+                                <h3><%= listing.event %></h3>
+                                <p>Owned by <%= listing.owner.orgName %></p>
+                                <a href="/listings/<%= listing._id %>" class="view-details">View more details</a>
+                            </div>
+                        <% } %>
                     <% }) %>
                 </div>
             <% } %>

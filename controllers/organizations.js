@@ -80,6 +80,8 @@ router.delete('/:organizationId', async (req, res) => {
     try {
         const organization = await Organization.findById(req.params.organizationId);
         if (organization.owner.equals(req.session.user._id)) {
+            // Delete all listings owned by this organization
+            await Listing.deleteMany({ owner: organization._id });
             await organization.deleteOne();
             res.redirect('/organizations');
         } else {

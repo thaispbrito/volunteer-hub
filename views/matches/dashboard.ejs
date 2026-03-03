@@ -15,7 +15,7 @@
             <h2>Listings Matching You</h2>
             <% if (volunteer && matchingListings && matchingListings.length > 0) { %>
                 <% matchingListings.forEach(listing => { %>
-                    <p><%= listing.event %> from <%= listing.owner.orgName %><a href="/listings/<%= listing._id %>"> + Details</a></p>
+                    <p><%= listing.event %> from <%= listing.owner.orgName %>&nbsp;&nbsp;<a href="/listings/<%= listing._id %>">+ Details</a></p>
                 <% }) %>
             <% } else if (volunteer) { %>
                 <p>No matching listings found.</p>
@@ -27,7 +27,7 @@
             <h2>Volunteers Matching Your Listings</h2>
             <% if (orgMatches && orgMatches.length > 0) { %>
                 <% orgMatches.forEach(match => { %>
-                    <h4><a href="/listings/<%= match.listing._id %>"><%= match.listing.event %> in <%= match.listing.city %></a></h4>
+                    <h4><%= match.listing.event %>&nbsp;&nbsp;<a href="/listings/<%= match.listing._id %>">+ Details</a></h4>
                     <% if (match.volunteers.length > 0) { %>
                         <% match.volunteers.forEach(vol => { %>
                             <p><strong>Volunteer:</strong> <%= vol.firstName %> <%= vol.lastName %> | <strong>Phone Number:</strong> <%= vol.phone %> | <strong>Email:</strong> <%= vol.email %></p>

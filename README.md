@@ -4,13 +4,13 @@
 
 **ServeSphere** is a volunteer hub designed to connect volunteers with organizations that are creating opportunities for positive social impact. The user can participate as a volunteer, an organization, or both, once logs in.
 
-Each user can create one volunteer profile, which represents their personal volunteering preferences. This profile can be edited at any time to reflect preference changes. In addition, a user may create multiple organization profiles, and organizations can create multiple listings, each representing a volunteering opportunity. This establishes the following relationship reflected in the project schemas using referencing:
+Each user can create one volunteer profile, which represents their personal volunteering preferences. This profile can be edited at any time to reflect preference changes. In addition, a user may create multiple organizations, and each organization can create multiple listings representing volunteering opportunities. This establishes the following relationship reflected in the project schemas:
 
 * User <-> Volunteer: one-to-one
 * User <-> Organization: one-to-many
 * Organization <-> Listing: one-to-many
 
-Users can browse all available listings through dedicated page **All Listings**, where opportunities from all organizations are displayed. To help users find relevant opportunities more easily, ServeSphere includes a **Matching Dashboard**.
+Users can browse all available listings through dedicated page **All Listings**, where opportunities from all organizations are displayed. To help users find relevant opportunities more easily, ServeSphere includes a **My Matches** page.
 
 The matching system works in both directions:
 
@@ -34,9 +34,9 @@ In addition to matching, volunteers can like and comment on listings they are in
 
 1. Sign in or Sign up: Create an account and access ServeSphere as a volunteer, an organization, or both.
 
-2. Create a volunteer profile and/or, if applicable, one or more organization profiles with volunteer opportunity listings.
+2. Create a volunteer profile and, if applicable, one or more organizations with volunteering opportunity listings.
 
-3. Explore Opportunities: Browse all available listings and view personalized matches through the Matching Dashboard.
+3. Explore Opportunities: Browse all available listings and view personalized matches.
 
 4. Engage: Like, comment on listings as a volunteer, and manage discussions on listings you own as an organization.
 
@@ -45,10 +45,10 @@ In addition to matching, volunteers can like and comment on listings they are in
 | <h3>Description</h3>       | <h3>Screenshot<h3> |
 | :----------------:| :------:   |
 | <h3 align="center">Landing Page</h3>     |   <img src="public/images/landing_page.png" width="600">   |
-| <h3 align="center">Sign In/SignUp</h3>      |   <img src="public/images/auth_page.png" width="600">   |
-| <h3 align="center">Add Volunteer Profile</h3>       |  <img src="public/images/form_page.png" width="600">   |
+| <h3 align="center">Sign In</h3>      |   <img src="public/images/auth_page.png" width="600">   |
+| <h3 align="center">Create Volunteer Profile</h3>       |  <img src="public/images/form_page.png" width="600">   |
 | <h3 align="center">View All Listings </h3>    |  <img src="public/images/listings_page.png" width="600">   |
-| <h3 align="center">View Matching Dashboard </h3>   | <img src="public/images/dashboard.png" width="600"> |
+| <h3 align="center">My Matches </h3>   | <img src="public/images/dashboard.png" width="600"> |
 | <h3 align="center">Comment & Favorites Section </h3>   | <img src="public/images/comment_section.png" width="600"> |
 
 

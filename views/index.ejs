@@ -24,7 +24,7 @@
                     <div class="card-container">
                         <!-- If a volunteer profile exists, redirect to the profile -->
                         <% if (volunteer) { %>
-                            <a href="/volunteer/profile">My Volunteer Profile</a>
+                            <a href="/volunteer/profile">View My Profile</a>
                         <!-- Otherwise, create a new one -->
                         <% } else {  %>
                             <a href="/volunteer/new">Add Volunteer Profile</a>
@@ -32,10 +32,10 @@
 
                         <!-- If organization profiles exist: -->
                         <% if (organizations.length > 0) { %>
-                            <a href="/organizations">My Organization Profile<%= organizations.length > 1 ? "s" : "" %></a>
+                            <a href="/organizations">View My organizations</a>
                         <!-- If there is no organization profile, create a new one -->
                         <% } else {  %>
-                            <a href="/organizations/new">Add Organization Profile</a>
+                            <a href="/organizations/new">Add Organization</a>
                         <% } %> 
                     </div>
 
